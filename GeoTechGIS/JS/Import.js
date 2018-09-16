@@ -30,6 +30,7 @@
 
     $.ajax(setting);
 }
+var editOrInsert = "";
 var submitEdit = function () {
     let DataFormat = {};
     DataFormat = {
@@ -69,7 +70,7 @@ var submitEdit = function () {
     $.ajax(setting);
 }
 var setValueOnModal = function (element) {
-    console.log(element);
+    
     let data_no = $(element).data("no");
     let data_name = $(element).data("name");
     let data_mobile = $(element).data("mobile");
@@ -93,6 +94,7 @@ var setValueOnModal = function (element) {
     if (data_fail === 'True')
         $("#fail").attr('checked', true);
 }
+
 var config = {
     load: function () {
         let setting = {};
