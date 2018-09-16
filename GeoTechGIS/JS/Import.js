@@ -32,12 +32,34 @@
 }
 var editOrInsert = "";
 var submitEdit = function () {
+    let ajaxLink = "";
+
+    if (editOrInsert === "edit")
+        ajaxLink = 'Import.aspx/UpdateData';
+    else if (editOrInsert === "insert")
+        ajaxLink = 'Import.aspx/InsertData';
+
+    let alert = "0", alert1 = "0", alert2 = "0", work = "0", fail = "0";
+    if ($("#alert").prop("checked"))
+        alert = "1";
+    if ($("#alarm1").prop("checked"))
+        alert1 = "1";
+    if ($("#alarm2").prop("checked"))
+        alert2 = "1";
+    if ($("#worksuspension").prop("checked"))
+        work = "1";
+    if ($("#fail").prop("checked"))
+        fail = "1";
     let DataFormat = {};
     DataFormat = {
-        PointIdx: Instrument.PointIdx,
-        PointNo: Instrument.PointNo,
-        GageType: Instrument.GageType,
-        StableRang: StableType
+        No: $("#no").val(),
+        Name: $("#name").val(),
+        PhoneNo: $("#mobileNo").val(),
+        Alert: alert,
+        Alarm1: alert1,
+        Alarm2: alert2,
+        Work: work,
+        Fail: fail
     }
 
     let setting = {};
@@ -45,7 +67,7 @@ var submitEdit = function () {
     setting.contentType = 'Application/json; charset=utf-8';
     setting.data = JSON.stringify(DataFormat);;
     setting.dataType = 'json';
-    setting.url = 'Import.aspx/PostExcelData';
+    setting.url = ajaxLink;
     setting.success = function (res) {
         let ans;
         if (res.hasOwnProperty('d')) {
@@ -70,7 +92,7 @@ var submitEdit = function () {
     $.ajax(setting);
 }
 var setValueOnModal = function (element) {
-    
+    editOrInsert = "edit";
     let data_no = $(element).data("no");
     let data_name = $(element).data("name");
     let data_mobile = $(element).data("mobile");

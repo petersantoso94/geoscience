@@ -14,10 +14,23 @@ public partial class GIS_Default : System.Web.UI.Page
     }
 
     [WebMethod(EnableSession = true)]
-    public static bool PostExcelData(string ProjectName)
+    public static bool InsertData(string ProjectName)
     {
         bool isOk = false;
         
+        isOk = true;
+        return isOk;
+    }
+
+    [WebMethod(EnableSession = true)]
+    public static bool UpdateData(string No, string Name, string PhoneNo, string Alert, string Alarm1, string Alarm2, string Work, string Fail)
+    {
+        bool isOk = false;
+        if (HttpContext.Current.Session["user"] == null)
+        {
+            return isOk;
+        }
+
         isOk = true;
         return isOk;
     }
