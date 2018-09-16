@@ -1,0 +1,591 @@
+﻿/******************************************
+*   最外框架
+*******************************************/
+
+body {
+    background: #EEF;
+    width: 100%;
+    height: 100%;
+}
+
+.highcharts-root {
+    font-family: Georgia !important
+}
+
+#loadCover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+    background: #666;
+    display: none;
+    z-index: 1000000;
+}
+
+input[type="select"] {
+    border: 1px solid #000;
+}
+
+.margin {
+    margin: 10px 0;
+}
+
+.proDetail {
+    margin: 80px 0 100px;
+    padding: 10px;
+    background: white;
+    border: 1px solid rgba(200, 200, 200, 1);
+    font-size: 20px;
+    line-height: 30px;
+}
+
+.proBar {
+    margin: 0 0 25px;
+    position: relative;
+    width: 100%;
+    max-height: 150px;
+    font-size: 15px;
+    line-height: 65px;
+}
+
+.pro {
+    background: #DDD;
+    text-align: center;
+    border-radius: 1px
+}
+
+.tabLabel {
+    height: 60px;
+    font-size: 20px;
+    line-height: 40px;
+    border-radius: 5px 5px 0 0;
+    z-index: 9;
+}
+
+.tabStyle {
+    border: 1px solid rgba(150, 150, 150, 0.8);
+    border-radius: 5px 5px 0 0;
+    font-weight: bold;
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.tabStyle:hover {
+    color: #FFF;
+    background: #0275D8;
+}
+
+.tabContent {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid black;
+    box-shadow: 1px 1px 8px 2px gray;
+    /*min-width: 1300px;*/
+    /*height:800px;*/
+}
+
+/***************************************************************
+*   header 
+***************************************************************/
+
+/* header */
+
+ul.header-info-account {
+    /* 位置 */
+    position: relative;
+    margin: 0;
+    padding: 0;
+    /* 元件大小 */
+    width: 100%;
+    height: 100%;
+    /* 其他設定 */
+    list-style: none;
+    cursor: pointer;
+}
+
+ul.header-info-account li {
+    float: left;
+    width: 50%;
+    height: 100%;
+    font-size: 1.5rem;
+    /* text-align: center; */
+}
+
+a.info-box {
+    position: relative;
+}
+
+a.info-box i::before {
+    clear: both;
+}
+
+span#alertEvent {
+    /* 位置 */
+    position: absolute;
+    top: 3px;
+    left: 17px;
+    /* 元件大小 */
+    width: 10px;
+    height: 15px;
+    /* 其他配置 */
+    background-color: #F00;
+    color: #FFF;
+    font-size: 5px;
+    line-height: 15px;
+    text-align: center;
+}
+
+ul.header-info-account li ul.list {
+    /* 位置 */
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    right: 0;
+    top: 100%;
+    /* 元件大小 */
+    width: 100%;
+    max-height: 300px;
+    border: 1px solid #000;
+    /* 其他配置 */
+    font-size: 1rem;
+    white-space: nowrap;
+    list-style: none;
+    overflow: auto;
+}
+
+ul.list li {
+    /* position */
+    clear: both;
+    /* Box 大小 */
+    width: 100%;
+    height: 40px;
+    /* 其他配置 */
+    font-size: 1.2rem;
+    line-height: 40px;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+}
+
+/***************************************************************
+*   MAP
+***************************************************************/
+
+.google-map-canvas {
+    margin: 15px auto;
+    width: 100%;
+    height: 970px;
+}
+
+#map {
+    margin: 15px auto;
+    width: 100%;
+    height: 700px;
+    border: 1px solid black;
+}
+
+.select {
+    width: 100%;
+    margin: 40.5px 11px;
+    border: 1px solid #000;
+    padding: 3px 0
+}
+
+.listArea {
+    position: relative;
+    width: 90%;
+    border: 1px solid black;
+    border-radius: 5px;
+    /* min-width: 430px; */
+    background: #FBFBFF;
+    /* margin-top: 200px; */
+    margin-top: 117px;
+    height: 700px;
+}
+
+.tabList {
+    /*position: absolute;*/
+    height: 660px;
+    width: 100%;
+}
+
+.ListMargin {
+    margin: 5px 0 5px 15px;
+    padding: 5px 0 0;
+}
+
+.ListItemWidth {
+    width: 80%;
+    padding: 5px 1px;
+    border: 1px solid #000
+}
+
+#showMapIconList {
+    width: 100%;
+}
+
+#selectInstrumentOnMap {
+    width: 100%;
+    cursor: pointer;
+}
+
+#selectInstrumentOnMap>thead>tr {
+    border: 1px solid black;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+#selectInstrumentOnMap>thead>tr>th {
+    text-align: center;
+}
+
+#showISelection {
+    width: 80%;
+    height: 155px;
+    border: 1px solid black;
+}
+
+#showISelectionInfo {
+    width: 80%;
+    height: 140px;
+    border: 1px solid black;
+}
+
+.AAADataTableHeight {
+    height: 528px;
+    border-radius: 0 0 5px 5px;
+}
+
+#showISelection {
+    overflow: auto;
+    background-color: #FFF;
+}
+
+#showISelectionInfo {
+    background: #FFF;
+}
+
+#showISelectionInfoInfo,
+#showISelectionList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background: #FFF;
+    /* border-bottom: 1px dashed gray; */
+    cursor: pointer;
+}
+
+#showISelectionInfoInfo>li {
+    padding-left: 5px;
+    border-bottom: 1px dashed gray;
+}
+
+#showISelectionInfoInfo>li>a {
+    padding-right: 5px;
+    float: right;
+}
+
+#showISelectionInfoInfo>li,
+#showISelectionList>li {
+    padding: 0px 5px;
+    line-height: 20px;
+    width: 100%;
+}
+
+#showISelectionList>li:hover {
+    background-color: #525E66;
+    color: #FFF;
+    text-decoration: underline;
+}
+
+/* 
+#showISelectionList>li>a {
+    width: 100%;
+    display: block;
+    color: #525E66;
+    background: none;
+} */
+
+/* #showISelectionList>li>a:hover {
+    text-decoration: underline;
+} */
+
+#showISelectionInfo {
+    overflow: auto;
+    text-decoration: underline
+}
+
+#valueChart,
+#chart,
+#MultipleChart {
+    width: 100% !important;
+    height: 450px !important;
+    border: 1px solid #e6e6e6;
+}
+
+.hide {
+    display: none;
+}
+
+.mapTypeArea {
+    list-style: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.mapTypeArea li {
+    float: left;
+    margin: 1px;
+    width: 100px;
+    padding: 0.5px 2px;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+
+.mapTypeArea li:hover {
+    background: orange;
+    color: white;
+}
+
+.mapTypeSelected {
+    background: orange;
+    color: white;
+}
+
+#IDSearch,
+#IDselect,
+#IDTypsSelect {
+    padding: 3px 0;
+    border: 1px solid #000;
+}
+
+/* 標記區塊 */
+
+.mark-block {
+    list-style: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.mark-block li {
+    float: left;
+    margin: 2px 1px;
+    padding: 1px;
+}
+
+.mark-block li:after {
+    clear: both;
+    content: '';
+}
+
+.marker-items {
+    padding: 2px 2px 2px 5px;
+    font-size: 6px;
+    font-weight: 4px;
+}
+
+.marker-type {
+    width: 10vw;
+    min-width: 100px;
+}
+
+/***************************************************************
+*   value
+***************************************************************/
+
+.valueTable {
+    width: 100%;
+    table-layout: auto;
+    cursor: pointer;
+    /*border: 1px solid;*/
+}
+
+.valueTable thead {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    background: #DDD;
+    border: 1px solid #EEE;
+    font-size: 1em;
+}
+
+.valueTable thead tr th {
+    border: 1px solid #EEE;
+    text-align: center;
+}
+
+.valueTable tbody {
+    display: block;
+    /*height: 500px;*/
+    /*overflow-y: auto;*/
+}
+
+.valueTable tbody tr {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    text-align: center;
+    background: #DDD;
+    border: 1px solid #EEE;
+}
+
+.valueTable tbody tr td {
+    border: 1px solid #EEE;
+}
+
+#AlarmTable,
+#ActionTable,
+#AlertTable {
+    text-align: center;
+    width: 100%;
+    /*height: 420px;*/
+}
+
+/*************************************
+    地圖右鍵選單
+*************************************/
+
+.contextmenu {
+    /* visibility: hidden; */
+    background: #ffffff;
+    border: 1px solid #8888FF;
+    padding: 10px 20px 0;
+    position: absolute;
+    width: 300px;
+    height: 200px;
+}
+
+.contextmenu::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 100%;
+    left: calc(50% - 25px);
+    border-style: solid;
+    border-width: 25px 25px 0 25px;
+    border-color: #FFF transparent transparent transparent;
+}
+
+.contextmenu>span {
+    position: absolute;
+    right: 10px;
+    top: 4px;
+}
+
+/**********************************************
+    chart                
+***********************************************/
+
+#chartChoiceSelectArea,
+#chartSelectInstrument,
+#chartFromDate,
+#chartToDate,
+#chartYAxisMax,
+#chartYAxisMin {
+    width: 100%;
+    border: 1px solid #000;
+}
+
+#tabDataContent {
+    overflow: auto;
+}
+
+/*#chartPartTable tbody tr,*/
+
+#chartPartTable tbody tr td {
+    margin: 1px;
+    padding: 5px 2px;
+    width: 100%;
+}
+
+#chartPartTable tbody tr>td {
+    width: auto;
+}
+
+/**
+    infoWindow 格式
+*/
+
+.infoWindowTable {
+    width: 100%;
+    text-align: center;
+}
+
+.infoWindowTable tbody tr {
+    border-bottom: 1px solid #888;
+}
+
+.infoWindowTable tbody tr td:nth-child(3) {
+    text-align: left;
+    padding-left: 80px;
+    padding-right: 0;
+}
+
+.chartPart {
+    width: 100%;
+    padding: 3px 0;
+}
+
+/**************************************
+                override
+***************************************/
+
+.modal-lg {
+    max-width: 75%;
+}
+
+.dataTables_wrapper {
+    width: 100%;
+}
+
+table.dataTable tbody th,
+table.dataTable tbody td {
+    padding: 7px 10px;
+}
+
+.valueTable_wrapper {
+    width: 100%;
+}
+
+.btn-outline-warning {
+    color: orange;
+    background-image: none;
+    background-color: transparent;
+    border-color: orange;
+}
+
+.btn-outline-warning:hover {
+    color: #fff;
+    background-color: orange;
+    border-color: orange;
+}
+
+.btn-outline-warning:focus,
+.btn-outline-warning.focus {
+    -webkit-box-shadow: 0 0 0 2px rgba(240, 173, 78, 0.5);
+    box-shadow: 0 0 0 2px rgba(240, 173, 78, 0.5);
+}
+
+.btn-outline-warning.disabled,
+.btn-outline-warning:disabled {
+    color: orange;
+    background-color: transparent;
+}
+
+.btn-outline-warning:active,
+.btn-outline-warning.active,
+.show>.btn-outline-warning.dropdown-toggle {
+    color: #fff;
+    background-color: orange;
+    border-color: orange;
+}
+
+.si-content-wrapper {
+    width: 150%;
+    max-width: 100%;
+    max-height: 100%;
+    padding: 30px;
+    background-color: #fff;
+    white-space: nowrap;
+}

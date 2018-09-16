@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "GeoTechGIS", "GeoTechGIS\", "{439E2320-9C76-4B83-8C52-32FF66AD36DA}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.6.1"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_5663"
+		Debug.AspNetCompiler.PhysicalPath = "GeoTechGIS\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_5663\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_5663"
+		Release.AspNetCompiler.PhysicalPath = "GeoTechGIS\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_5663\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "5663"
+		SlnRelativePath = "GeoTechGIS\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{439E2320-9C76-4B83-8C52-32FF66AD36DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{439E2320-9C76-4B83-8C52-32FF66AD36DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5B014EAC-7080-4079-B6AE-D9AE00CCE711}
+	EndGlobalSection
+EndGlobal
