@@ -78,7 +78,7 @@ var submitEdit = function () {
         switch (ans) {
             case true:
                 //將帳號可使用的專案給導入到前端
-                alert('TRUE');
+                window.location.replace(window.location.href);
                 break;
             case false:
                 alert('FALSE');
@@ -90,6 +90,10 @@ var submitEdit = function () {
     };
 
     $.ajax(setting);
+}
+var setValueInsert = function () {
+    editOrInsert = "insert";
+    $("#no").val("-1");
 }
 var setValueOnModal = function (element) {
     editOrInsert = "edit";
@@ -132,7 +136,6 @@ var config = {
                 alert(ans.Message);
                 window.location.href = "../Login.aspx";
             } else {
-                console.log(ans);
                 MainData = ans;
                 config.ShowOnThePage(ans);
             }
