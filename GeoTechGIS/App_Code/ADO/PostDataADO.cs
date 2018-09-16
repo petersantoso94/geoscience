@@ -81,6 +81,19 @@ public class PostDataADO
         return isOk;
     }
 
+    public bool DeleteDataPhonebook(string no)
+    {
+        bool isOk = false;
+        
+        cmd.CommandText = "DELETE FROM PhoneBookSMS WHERE No = '"+no+"'";
+        con.Open();
+        read = cmd.ExecuteReader();
+        isOk = read.HasRows ? true : isOk;
+        read.Close();
+        con.Close();
+        return isOk;
+    }
+
     //判斷帳戶 並且登入帳號相關資訊儲存在Session
     public bool InsertData(InstrumentView data)
     {

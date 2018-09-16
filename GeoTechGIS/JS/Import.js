@@ -31,6 +31,42 @@
     $.ajax(setting);
 }
 var editOrInsert = "";
+var deleteData = function (element) {
+    let data_no = $(element).data("no");
+    let DataFormat = {};
+    DataFormat = {
+        No: data_no
+    };
+    let setting = {};
+    setting.type = 'post';
+    setting.contentType = 'Application/json; charset=utf-8';
+    setting.data = JSON.stringify(DataFormat);
+    setting.dataType = 'json';
+    setting.url = 'Import.aspx/DeleteData';
+    setting.success = function (res) {
+        let ans;
+        if (res.hasOwnProperty('d')) {
+            ans = res.d;
+        } else {
+            ans = res;
+        }
+        switch (ans) {
+            case true:
+                //將帳號可使用的專案給導入到前端
+                window.location.replace(window.location.href);
+                break;
+            case false:
+                alert('FALSE');
+                break;
+        }
+    };
+    setting.error = function (err) {
+        console.error(err);
+    };
+    if (confirm("Do you want to delete this Data?") == true) {
+        $.ajax(setting);
+    }
+}
 var submitEdit = function () {
     let ajaxLink = "";
 
@@ -184,7 +220,8 @@ var config = {
                 5: (element.Alert2 === 'True' ? '<i class="fa fa-check-circle"></i>' : '<i class="fa fa-times-circle"></i>'),
                 6: (element.WorkSuspension === 'True' ? '<i class="fa fa-check-circle"></i>' : '<i class="fa fa-times-circle"></i>'),
                 7: (element.Fail === 'True' ? '<i class="fa fa-check-circle"></i>' : '<i class="fa fa-times-circle"></i>'),
-                8: '<button class="fa fa-edit" type="button" onclick="setValueOnModal(this)" data-toggle="modal" data-target="#editValue" data-fail="' + element.Fail + '" data-work="' + element.WorkSuspension +'" data-alert2="' + element.Alert2 + '" data-alert1="' + element.Alert1 + '" data-alert="' + element.Alert + '" data-mobile="' + element.MobileNo + '" data-name="' + element.Name + '" data-no="' + element.No + '"></button>'
+                8: '<button class="fa fa-edit" style="margin:10px;" type="button" onclick="setValueOnModal(this)" data-toggle="modal" data-target="#editValue" data-fail="' + element.Fail + '" data-work="' + element.WorkSuspension + '" data-alert2="' + element.Alert2 + '" data-alert1="' + element.Alert1 + '" data-alert="' + element.Alert + '" data-mobile="' + element.MobileNo + '" data-name="' + element.Name + '" data-no="' + element.No + '"></button>' +
+                    '<button class="fas fa-trash-alt" style="margin:10px;" type="button" onclick="deleteData(this)" data-no="' + element.No + '"></button>'
             });
 
         });
