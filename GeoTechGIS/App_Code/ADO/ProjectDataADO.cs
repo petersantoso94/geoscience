@@ -27,6 +27,42 @@ public class ProjectDataADO
         cmd = new SqlCommand("", con);
     }
 
+    //pos data
+    public List<PosData> GetPosData()
+    {
+        List<PosData> list = new List<PosData>();
+        DataTable DataList = new DataTable();
+
+        cmd.CommandText = "SELECT * FROM PosELP";
+        adapter = new SqlDataAdapter(cmd);
+        adapter.Fill(DataList);
+
+        foreach (DataRow item in DataList.Rows)
+        {
+            PosData data = new PosData();
+            data.PointNo = item["PointNo"].ToString();
+            data.Station = item["Station"].ToString();
+            data.Area = item["Area"].ToString();
+            data.Factor1 = (item["Factor1"]).ToString();
+            data.Factor2 = (item["Factor2"]).ToString();
+            data.Factor3 = (item["Factor3"]).ToString();
+            data.IniRead1 = (item["IniRead1"]).ToString();
+            data.IniRead2 = (item["IniRead2"]).ToString();
+            data.IniRead3 = (item["IniRead3"]).ToString();
+            data.InsDate = item["InsDate"].ToString();
+            data.IniDate = item["IniDate"].ToString();
+            data.Alert = (item["Alert"]).ToString();
+            data.Alarm = (item["Alarm"]).ToString();
+            data.Action = (item["Action"]).ToString();
+            data.Rem1 = item["Rem1"].ToString();
+            data.Rem2 = item["Rem2"].ToString();
+            data.Rem3 = item["Rem3"].ToString();
+            list.Add(data);
+        }
+
+        return list;
+    }
+
     //phone book data
     public List<PhoneBookData> GetPhoneBookData()
     {

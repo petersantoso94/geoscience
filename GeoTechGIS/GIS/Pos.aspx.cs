@@ -43,7 +43,7 @@ public partial class GIS_Default : System.Web.UI.Page
     }
 
     [WebMethod(EnableSession = true)]
-    public static bool UpdateData(string No, string Name, string PhoneNo, string Alert, string Alarm1, string Alarm2, string Work, string Fail)
+    public static bool UpdateData(string pointNo, string station, string area, string factor1, string factor2, string factor3, string iniRead1, string iniRead2, string iniRead3, string insDate, string iniDate, string alert, string alarm, string action, string rem1, string rem2, string rem3)
     {
         bool isOk = false;
         if (HttpContext.Current.Session["user"] == null)
@@ -51,16 +51,16 @@ public partial class GIS_Default : System.Web.UI.Page
             return isOk;
         }
         PostDataADO post = new PostDataADO();
-        PhoneBookData data = new PhoneBookData(Convert.ToInt32(No), Name, PhoneNo, Alert, Alarm1, Alarm2, Work, Fail);
-        post.UpdateDataPhonebook(data);
+        PosData data = new PosData(pointNo, station, area,  factor1, factor2, factor3, iniRead1, iniRead2, iniRead3, insDate, iniDate, alert, alarm, action, rem1, rem2, rem3);
+        post.upd(data);
         isOk = true;
         return isOk;
     }
 
     [WebMethod(EnableSession = true)]
-    public static returnPhoneBookData GetPosData()
+    public static returnPosData GetPosData()
     {
-        returnPhoneBookData package = new returnPhoneBookData();
+        returnPosData package = new returnPosData();
 
         if (HttpContext.Current.Session["user"] == null)
         {
@@ -82,7 +82,7 @@ public partial class GIS_Default : System.Web.UI.Page
                 {
                     dao = new ProjectDataADO(item.GetPorjectDB());
                     package.ProjectInfo = item;
-                    package.DataPackage = dao.GetPhoneBookData();
+                    package.DataPackage = dao.GetPosData();
                     package.isOk = true;
                 }
             }

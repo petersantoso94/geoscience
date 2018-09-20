@@ -19,17 +19,17 @@ var ValueTable = $('#valueTable').DataTable({
     "pageLength": 10,
     dom: 'Bfrtip',
     buttons: [{
-            extend: 'excelHtml5',
-            title: fileName
-        },
-        {
-            extend: 'pdfHtml5',
-            title: fileName
-        },
-        {
-            extend: 'csvHtml5',
-            title: fileName
-        }
+        extend: 'excelHtml5',
+        title: fileName
+    },
+    {
+        extend: 'pdfHtml5',
+        title: fileName
+    },
+    {
+        extend: 'csvHtml5',
+        title: fileName
+    }
     ]
 });
 

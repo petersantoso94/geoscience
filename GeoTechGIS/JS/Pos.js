@@ -6,7 +6,7 @@
     setting.contentType = 'Application/json; charset=utf-8';
     setting.data = fileCSV;
     setting.dataType = 'json';
-    setting.url = 'PhoneBook.aspx/PostExcelData';
+    setting.url = 'Pos.aspx/PostExcelData';
     setting.success = function (res) {
         let ans;
         if (res.hasOwnProperty('d')) {
@@ -42,7 +42,7 @@ var deleteData = function (element) {
     setting.contentType = 'Application/json; charset=utf-8';
     setting.data = JSON.stringify(DataFormat);
     setting.dataType = 'json';
-    setting.url = 'PhoneBook.aspx/DeleteData';
+    setting.url = 'Pos.aspx/DeleteData';
     setting.success = function (res) {
         let ans;
         if (res.hasOwnProperty('d')) {
@@ -71,9 +71,9 @@ var submitEdit = function () {
     let ajaxLink = "";
 
     if (editOrInsert === "edit")
-        ajaxLink = 'PhoneBook.aspx/UpdateData';
+        ajaxLink = 'Pos.aspx/UpdateData';
     else if (editOrInsert === "insert")
-        ajaxLink = 'PhoneBook.aspx/InsertData';
+        ajaxLink = 'Pos.aspx/InsertData';
 
     let alert = "0", alert1 = "0", alert2 = "0", work = "0", fail = "0";
     if ($("#alert").prop("checked"))
@@ -129,32 +129,46 @@ var submitEdit = function () {
 }
 var setValueInsert = function () {
     editOrInsert = "insert";
-    $("#no").val("-1");
+    $("#PointNo").val("-1");
 }
 var setValueOnModal = function (element) {
     editOrInsert = "edit";
-    let data_no = $(element).data("no");
-    let data_name = $(element).data("name");
-    let data_mobile = $(element).data("mobile");
-    let data_alert = $(element).data("alert");
-    let data_alert1 = $(element).data("alert1");
-    let data_alert2 = $(element).data("alert2");
-    let data_work = $(element).data("work");
-    let data_fail = $(element).data("fail");
+    let point = $(element).data("point");
+    let station = $(element).data("station");
+    let area = $(element).data("area");
+    let factor1 = $(element).data("factor1");
+    let factor2 = $(element).data("factor2");
+    let factor3 = $(element).data("factor3");
+    let iniread1 = $(element).data("iniread1");
+    let iniread2 = $(element).data("iniread2");
+    let iniread3 = $(element).data("iniread3");
+    let insdate = $(element).data("insdate").split(' ')[0].split('/');
+    let inidate = $(element).data("inidate").split(' ')[0].split('/');
+    let alert = $(element).data("alert");
+    let alarm = $(element).data("alarm");
+    let action = $(element).data("action");
+    let rem1 = $(element).data("rem1");
+    let rem2 = $(element).data("rem2");
+    let rem3 = $(element).data("rem3");
 
-    $("#no").val(data_no);
-    $("#name").val(data_name);
-    $("#mobileNo").val(data_mobile);
-    if (data_alert === 'True')
-        $("#alert").attr('checked', true);
-    if (data_alert1 === 'True')
-        $("#alarm1").attr('checked', true);
-    if (data_alert2 === 'True')
-        $("#alarm2").attr('checked', true);
-    if (data_work === 'True')
-        $("#worksuspension").attr('checked', true);
-    if (data_fail === 'True')
-        $("#fail").attr('checked', true);
+
+    $("#PointNo").val(point);
+    $("#Station").val(station);
+    $("#Area").val(area);
+    $("#Factor1").val(factor1);
+    $("#Factor2").val(factor2);
+    $("#Factor3").val(factor3);
+    $("#IniRead1").val(iniread1);
+    $("#IniRead2").val(iniread2);
+    $("#IniRead3").val(iniread3);
+    $("#Rem1").val(rem1);
+    $("#Rem2").val(rem2);
+    $("#Rem3").val(rem3);
+    $("#Alert").val(alert);
+    $("#Alarm").val(alarm);
+    $("#Action").val(action);
+    $("#IniDate").val(inidate[2] + "-" + (inidate[0].length === 2 ? inidate[0] : ("0" + inidate[0])) + "-" + (inidate[1].length === 2 ? inidate[1] : ("0" + inidate[1])));
+    $("#Insdate").val(insdate[2] + "-" + (insdate[0].length === 2 ? insdate[0] : ("0" + insdate[0])) + "-" + (insdate[1].length === 2 ? insdate[1] : ("0" + insdate[1])));
 }
 
 var config = {
@@ -212,16 +226,30 @@ var config = {
 
         Instruments.forEach(function (element) {
             InputArray.push({
-                0: element.No,
-                1: element.Name,
-                2: element.MobileNo,
-                3: (element.Alert === 'True' ? '<i class="fa fa-check-circle"></i>' : '<i class="fa fa-times-circle"></i>'),
-                4: (element.Alert1 === 'True' ? '<i class="fa fa-check-circle"></i>' : '<i class="fa fa-times-circle"></i>'),
-                5: (element.Alert2 === 'True' ? '<i class="fa fa-check-circle"></i>' : '<i class="fa fa-times-circle"></i>'),
-                6: (element.WorkSuspension === 'True' ? '<i class="fa fa-check-circle"></i>' : '<i class="fa fa-times-circle"></i>'),
-                7: (element.Fail === 'True' ? '<i class="fa fa-check-circle"></i>' : '<i class="fa fa-times-circle"></i>'),
-                8: '<button class="fa fa-edit" style="margin:10px;" type="button" onclick="setValueOnModal(this)" data-toggle="modal" data-target="#editValue" data-fail="' + element.Fail + '" data-work="' + element.WorkSuspension + '" data-alert2="' + element.Alert2 + '" data-alert1="' + element.Alert1 + '" data-alert="' + element.Alert + '" data-mobile="' + element.MobileNo + '" data-name="' + element.Name + '" data-no="' + element.No + '"></button>' +
-                    '<button class="fas fa-trash-alt" style="margin:10px;" type="button" onclick="deleteData(this)" data-no="' + element.No + '"></button>'
+                0: element.PointNo,
+                1: element.Station,
+                2: element.Area,
+                3: element.Factor1,
+                4: element.Factor2,
+                5: element.Factor3,
+                6: element.IniRead1,
+                7: element.IniRead2,
+                8: element.IniRead3,
+                9: element.InsDate,
+                10: element.IniDate,
+                11: element.Alert,
+                12: element.Alarm,
+                13: element.Action,
+                14: element.Rem1,
+                15: element.Rem2,
+                16: element.Rem3,
+                17: '<button class="fa fa-edit" style="margin:10px;" type="button" onclick="setValueOnModal(this)" data-toggle="modal" data-target="#editValue" data-point="' +
+                    element.PointNo + '" data-station="' + element.Station + '" data-area="' + element.Area + '" data-factor1="' + element.Factor1 + '" data-factor2="' +
+                    element.Factor2 + '" data-factor3="' + element.Factor3 + '" data-iniread1="' + element.IniRead1 + '" data-iniread2="' + element.IniRead2 + '" data-iniread3="' +
+                    element.IniRead3 + '" data-insdate="' + element.InsDate + '" data-inidate="' + element.IniDate + '" data-alert="' + element.Alert + '"  data-alarm="' +
+                    element.Alarm + '" data-action="' + element.Action + '" data-rem1="' + element.Rem1 + '" data-rem2="' + element.Rem2 + '" data-rem3="' +
+                    element.Rem3 + '"></button>' +
+                    '<button class="fas fa-trash-alt" style="margin:10px;" type="button" onclick="deleteData(this)" data-point="' + element.PointNo + '"></button>'
             });
 
         });
