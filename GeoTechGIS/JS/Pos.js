@@ -32,7 +32,7 @@
 }
 var editOrInsert = "";
 var deleteData = function (element) {
-    let data_no = $(element).data("no");
+    let data_no = $(element).data("point");
     let DataFormat = {};
     DataFormat = {
         No: data_no
@@ -74,28 +74,26 @@ var submitEdit = function () {
         ajaxLink = 'Pos.aspx/UpdateData';
     else if (editOrInsert === "insert")
         ajaxLink = 'Pos.aspx/InsertData';
-
-    let alert = "0", alert1 = "0", alert2 = "0", work = "0", fail = "0";
-    if ($("#alert").prop("checked"))
-        alert = "1";
-    if ($("#alarm1").prop("checked"))
-        alert1 = "1";
-    if ($("#alarm2").prop("checked"))
-        alert2 = "1";
-    if ($("#worksuspension").prop("checked"))
-        work = "1";
-    if ($("#fail").prop("checked"))
-        fail = "1";
+    
     let DataFormat = {};
     DataFormat = {
-        No: $("#no").val(),
-        Name: $("#name").val(),
-        PhoneNo: $("#mobileNo").val(),
-        Alert: alert,
-        Alarm1: alert1,
-        Alarm2: alert2,
-        Work: work,
-        Fail: fail
+        pointNo: $("#PointNo").val(),
+        station: $("#Station").val(),
+        area: $("#Area").val(),
+        factor1: $("#Factor1").val(),
+        factor2: $("#Factor2").val(),
+        factor3: $("#Factor3").val(),
+        iniRead1: $("#IniRead1").val(),
+        iniRead2: $("#IniRead2").val(),
+        iniRead3: $("#IniRead3").val(),
+        insDate: $("#Insdate").val(),
+        iniDate: $("#IniDate").val(),
+        alert: $("#Alert").val(),
+        alarm: $("#Alarm").val(),
+        action: $("#Action").val(),
+        rem1: $("#Rem1").val(),
+        rem2: $("#Rem2").val(),
+        rem3: $("#Rem3").val()
     }
 
     let setting = {};
@@ -129,10 +127,12 @@ var submitEdit = function () {
 }
 var setValueInsert = function () {
     editOrInsert = "insert";
-    $("#PointNo").val("-1");
+    $("input").val("");
+    $("#PointNo").removeAttr("readonly");
 }
 var setValueOnModal = function (element) {
     editOrInsert = "edit";
+    $("#PointNo").attr("readonly", "readonly");
     let point = $(element).data("point");
     let station = $(element).data("station");
     let area = $(element).data("area");

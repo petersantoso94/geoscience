@@ -22,13 +22,13 @@ public partial class GIS_Default : System.Web.UI.Page
             return isOk;
         }
         PostDataADO post = new PostDataADO();
-        post.DeleteDataPhonebook(No);
+        post.DeleteDataPos(No);
         isOk = true;
         return isOk;
     }
 
     [WebMethod(EnableSession = true)]
-    public static bool InsertData(string No, string Name, string PhoneNo, string Alert, string Alarm1, string Alarm2, string Work, string Fail)
+    public static bool InsertData(string pointNo, string station, string area, string factor1, string factor2, string factor3, string iniRead1, string iniRead2, string iniRead3, string insDate, string iniDate, string alert, string alarm, string action, string rem1, string rem2, string rem3)
     {
         bool isOk = false;
         if (HttpContext.Current.Session["user"] == null)
@@ -36,8 +36,8 @@ public partial class GIS_Default : System.Web.UI.Page
             return isOk;
         }
         PostDataADO post = new PostDataADO();
-        PhoneBookData data = new PhoneBookData(Convert.ToInt32(No), Name, PhoneNo, Alert, Alarm1, Alarm2, Work, Fail);
-        post.InsertDataPhonebook(data);
+        PosData data = new PosData( pointNo, station, area, factor1, factor2, factor3, iniRead1, iniRead2, iniRead3, insDate, iniDate, alert, alarm, action, rem1, rem2, rem3);
+        post.InsertDataPos(data);
         isOk = true;
         return isOk;
     }
@@ -52,7 +52,7 @@ public partial class GIS_Default : System.Web.UI.Page
         }
         PostDataADO post = new PostDataADO();
         PosData data = new PosData(pointNo, station, area,  factor1, factor2, factor3, iniRead1, iniRead2, iniRead3, insDate, iniDate, alert, alarm, action, rem1, rem2, rem3);
-        post.upd(data);
+        post.UpdateDataPos(data);
         isOk = true;
         return isOk;
     }

@@ -192,7 +192,7 @@
                                 <label>Point No</label>
                             </div>
                             <div class="col-md-4">
-                                <input type="text" id="PointNo" />
+                                <input type="text" id="PointNo" readonly="readonly"/>
                             </div>
                             <div class="col-md-2">
                                 <label>Station</label>
