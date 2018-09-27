@@ -28,7 +28,7 @@ public class ProjectDataADO
     }
 
     //elp data
-    public List<ELPData> GetELPData(string from, string to)
+    public List<ELPData> GetELPData(string from = "", string to = "")
     {
         List<ELPData> list = new List<ELPData>();
         DataTable DataList = new DataTable();

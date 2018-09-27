@@ -34,7 +34,7 @@ var filter = {from:"",to:""};
 var setFilter = function (element) {
     filter.from = $("#filterFromDate").val();
     filter.to = $("#filterToDate").val();
-    config.load();
+    config.loadFilter();
 }
 var resetFilter = function (element) {
     filter.from = "";
@@ -199,6 +199,29 @@ var config = {
 
         $.ajax(setting);
     },
+    loadFilter: function (filter) {
+        let setting = {};
+        setting.type = 'post';
+        setting.contentType = 'Application/json; charset=utf-8';
+        setting.data = JSON.stringify(filter);
+        setting.dataType = 'json';
+        setting.url = 'ELP.aspx/GetELPData';
+        setting.success = function (res) {
+            let ans = res.hasOwnProperty('d') ? res.d : res;
+            if (!ans.isOk) {
+                alert(ans.Message);
+                window.location.href = "../Login.aspx";
+            } else {
+                MainData = ans;
+                config.ShowOnThePage(ans);
+            }
+        };
+        setting.error = function (err) {
+            console.error(err);
+        };
+
+        $.ajax(setting);
+    },
     ShowOnThePage: function (element) {
         //更改專案欄位
         this.SetToProjectList(element.ProjectsList, element.ProjectInfo.ProjectName);
@@ -226,7 +249,34 @@ var config = {
         }
 
         let InputArray = [];
-
+        ValueTable.clear();
+        ValueTable.destroy();
+        $("tbody#valueTable").html("");
+        ValueTable = $('#valueTable').DataTable({
+            'scrollY': '390px',
+            'scrollCollapse': false,
+            'scrollX': true,
+            'columnDefs': [{
+                'className': 'dt-center',
+                'targets': '_all'
+            }],
+            'bAutoWidth': true,
+            "pageLength": 10,
+            dom: 'Bfrtip',
+            buttons: [{
+                extend: 'excelHtml5',
+                title: fileName
+            },
+            {
+                extend: 'pdfHtml5',
+                title: fileName
+            },
+            {
+                extend: 'csvHtml5',
+                title: fileName
+            }
+            ]
+        });
         Instruments.forEach(function (element) {
             InputArray.push({
                 0: element.Date,
