@@ -31,6 +31,68 @@ public class PostDataADO
         context = HttpContext.Current;
     }
 
+    public bool UpdateDataELP(ELPData data)
+    {
+        bool isOk = false;
+
+        cmd.CommandText = "UPDATE ELP " +
+   "SET [MeaNo] = '" + data.MeaNo +
+      "',[Read1] = '" + data.Read1 +
+      "',[Read2] = '" + data.Read2 +
+      "',[Read3] = '" + data.Read3 +
+      "',[Value] = '" + data.Value +
+      "',[Initial] = '" + data.Initial +
+      "',[Normal] = '" + data.Normal +
+      "',[ReM] = '" + data.ReM +
+      "',[Sensor] = '" + data.Sensor +
+      "' WHERE [PointNo] = '" + data.PointNo + "' AND datediff(day, [Date], '"+data.Date+"') = 0";
+
+        con.Open();
+        read = cmd.ExecuteReader();
+        isOk = read.HasRows ? true : isOk;
+        read.Close();
+        con.Close();
+        return isOk;
+    }
+    public bool DeleteDataELP(string no, string date)
+    {
+        bool isOk = false;
+
+        cmd.CommandText = "DELETE FROM ELP WHERE PointNo = '" + no + "' AND datediff(day, [Date], '" + date + "') = 0";
+        con.Open();
+        read = cmd.ExecuteReader();
+        isOk = read.HasRows ? true : isOk;
+        read.Close();
+        con.Close();
+        return isOk;
+    }
+
+    public bool InsertDataELP(ELPData data)
+    {
+        bool isOk = false;
+
+        cmd.CommandText = "INSERT INTO ELP VALUES('" +
+            data.Date + "'" +
+   ",'" + data.PointNo +
+      "', '" + data.MeaNo +
+      "', '" + data.Read1 +
+      "', '" + data.Read2 +
+      "', '" + data.Read3 + "'" +
+      ", '" + data.Value +
+      "', '" + data.Initial +
+      "', '" + data.Normal +
+      "', '" + data.ReM +
+      "', '" + data.Sensor +
+      "')";
+
+        con.Open();
+        read = cmd.ExecuteReader();
+        isOk = read.HasRows ? true : isOk;
+        read.Close();
+        con.Close();
+        return isOk;
+    }
+
     public bool UpdateDataPos(PosData data)
     {
         bool isOk = false;

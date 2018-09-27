@@ -144,7 +144,7 @@
                                     <tr>
                                         <th>Date</th>
                                         <th>Point No</th>
-                                        <th>Meal No</th>
+                                        <th>Mea No</th>
                                         <th>Read1</th>
                                         <th>Read2</th>
                                         <th>Read3</th>
@@ -186,7 +186,7 @@
                                 <label>Date</label>
                             </div>
                             <div class="col-md-4">
-                                <input type="date" id="Date" />
+                                <input type="date" id="Date" readonly="readonly"/>
                             </div>
                             <div class="col-md-2">
                                 <label>Point No</label>
@@ -195,10 +195,10 @@
                                 <input type="text" id="PointNo" readonly="readonly"/>
                             </div>
                             <div class="col-md-2">
-                                <label>Meal No</label>
+                                <label>Mea No</label>
                             </div>
                             <div class="col-md-4">
-                                <input type="text" id="MealNo" />
+                                <input type="text" id="MeaNo" />
                             </div>
                             <div class="col-md-2">
                                 <label>Read1</label>
@@ -228,7 +228,8 @@
                                 <label>Initial</label>
                             </div>
                             <div class="col-md-4">
-                                <input type="text" id="Initial"  />
+                                <input type="checkbox" id="Initial" />
+                                <label>Yes</label>
                             </div>
                             <div class="col-md-2">
                                 <label>Normal</label>

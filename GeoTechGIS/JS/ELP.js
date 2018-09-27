@@ -33,9 +33,11 @@
 var editOrInsert = "";
 var deleteData = function (element) {
     let data_no = $(element).data("point");
+    let data_date = $(element).data("date");
     let DataFormat = {};
     DataFormat = {
-        No: data_no
+        No: data_no,
+        Date: data_date
     };
     let setting = {};
     setting.type = 'post';
@@ -75,25 +77,22 @@ var submitEdit = function () {
     else if (editOrInsert === "insert")
         ajaxLink = 'ELP.aspx/InsertData';
     
+    let initial_ = "0";
+    if ($("#Initial").prop("checked"))
+        initial_ = "1";
     let DataFormat = {};
     DataFormat = {
         pointNo: $("#PointNo").val(),
-        station: $("#Station").val(),
-        area: $("#Area").val(),
-        factor1: $("#Factor1").val(),
-        factor2: $("#Factor2").val(),
-        factor3: $("#Factor3").val(),
-        iniRead1: $("#IniRead1").val(),
-        iniRead2: $("#IniRead2").val(),
-        iniRead3: $("#IniRead3").val(),
-        insDate: $("#Insdate").val(),
-        iniDate: $("#IniDate").val(),
-        alert: $("#Alert").val(),
-        alarm: $("#Alarm").val(),
-        action: $("#Action").val(),
-        rem1: $("#Rem1").val(),
-        rem2: $("#Rem2").val(),
-        rem3: $("#Rem3").val()
+        date: $("#Date").val(),
+        meaNo: $("#MeaNo").val(),
+        read1: $("#Read1").val(),
+        read2: $("#Read2").val(),
+        read3: $("#Read3").val(),
+        value: $("#Value").val(),
+        initial: initial_,
+        normal: $("#Normal").val(),
+        reM: $("#ReM").val(),
+        sensor: $("#Sensor").val(),
     }
 
     let setting = {};
@@ -129,46 +128,38 @@ var setValueInsert = function () {
     editOrInsert = "insert";
     $("input").val("");
     $("#PointNo").removeAttr("readonly");
+    $("#Date").removeAttr("readonly");
 }
 var setValueOnModal = function (element) {
     editOrInsert = "edit";
     $("#PointNo").attr("readonly", "readonly");
+    $("#Date").attr("readonly", "readonly");
     let point = $(element).data("point");
-    let station = $(element).data("station");
-    let area = $(element).data("area");
-    let factor1 = $(element).data("factor1");
-    let factor2 = $(element).data("factor2");
-    let factor3 = $(element).data("factor3");
-    let iniread1 = $(element).data("iniread1");
-    let iniread2 = $(element).data("iniread2");
-    let iniread3 = $(element).data("iniread3");
-    let insdate = $(element).data("insdate").split(' ')[0].split('/');
-    let inidate = $(element).data("inidate").split(' ')[0].split('/');
-    let alert = $(element).data("alert");
-    let alarm = $(element).data("alarm");
-    let action = $(element).data("action");
-    let rem1 = $(element).data("rem1");
-    let rem2 = $(element).data("rem2");
-    let rem3 = $(element).data("rem3");
+    let meano = $(element).data("meano");
+    let read1 = $(element).data("read1");
+    let read2 = $(element).data("read2");
+    let read3 = $(element).data("read3");
+    let value = $(element).data("value");
+    let initial = $(element).data("initial");
+    let normal = $(element).data("normal");
+    let sensor = $(element).data("sensor");
+    let date = $(element).data("date").split(' ')[0].split('/');
+    let rem = $(element).data("rem");
+
+    if (initial === 'True')
+        $("#Initial").attr('checked', true);
 
 
     $("#PointNo").val(point);
-    $("#Station").val(station);
-    $("#Area").val(area);
-    $("#Factor1").val(factor1);
-    $("#Factor2").val(factor2);
-    $("#Factor3").val(factor3);
-    $("#IniRead1").val(iniread1);
-    $("#IniRead2").val(iniread2);
-    $("#IniRead3").val(iniread3);
-    $("#Rem1").val(rem1);
-    $("#Rem2").val(rem2);
-    $("#Rem3").val(rem3);
-    $("#Alert").val(alert);
-    $("#Alarm").val(alarm);
-    $("#Action").val(action);
-    $("#IniDate").val(inidate[2] + "-" + (inidate[0].length === 2 ? inidate[0] : ("0" + inidate[0])) + "-" + (inidate[1].length === 2 ? inidate[1] : ("0" + inidate[1])));
-    $("#Insdate").val(insdate[2] + "-" + (insdate[0].length === 2 ? insdate[0] : ("0" + insdate[0])) + "-" + (insdate[1].length === 2 ? insdate[1] : ("0" + insdate[1])));
+    $("#MeaNo").val(meano);
+    $("#Read1").val(read1);
+    $("#Read2").val(read2);
+    $("#Read3").val(read3);
+    $("#Value").val(value);
+    $("#Normal").val(normal);
+    $("#ReM").val(rem);
+    $("#Sensor").val(sensor);
+    $("#Date").val(date[2] + "-" + (date[0].length === 2 ? date[0] : ("0" + date[0])) + "-" + (date[1].length === 2 ? date[1] : ("0" + date[1])));
 }
 
 var config = {
@@ -233,7 +224,7 @@ var config = {
                 4: element.Read2,
                 5: element.Read3,
                 6: element.Value,
-                7: element.Initial,
+                7: (element.Initial === 'True' ? '<i class="fa fa-check-circle"></i>' : '<i class="fa fa-times-circle"></i>'),
                 8: element.Normal,
                 9: element.ReM,
                 10: element.Sensor,
@@ -241,7 +232,7 @@ var config = {
                     element.PointNo + '" data-date="' + element.Date + '" data-meano="' + element.MeaNo + '" data-read1="' + element.Read1 + '" data-read2="' +
                     element.Read2 + '" data-read3="' + element.Read3 + '" data-value="' + element.Value + '" data-initial="' + element.Initial + '" data-normal="' +
                     element.Normal + '" data-rem="' + element.ReM + '" data-sensor="' + element.Sensor + '"></button>' +
-                    '<button class="fas fa-trash-alt" style="margin:10px;" type="button" onclick="deleteData(this)" data-point="' + element.PointNo + '"></button>'
+                    '<button class="fas fa-trash-alt" style="margin:10px;" type="button" onclick="deleteData(this)" data-point="' + element.PointNo + '" data-date="' + element.Date + '"></button>'
             });
 
         });

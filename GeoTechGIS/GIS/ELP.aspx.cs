@@ -14,7 +14,7 @@ public partial class GIS_Default : System.Web.UI.Page
     }
 
     [WebMethod(EnableSession = true)]
-    public static bool DeleteData(string No)
+    public static bool DeleteData(string No, string Date)
     {
         bool isOk = false;
         if (HttpContext.Current.Session["user"] == null)
@@ -22,13 +22,13 @@ public partial class GIS_Default : System.Web.UI.Page
             return isOk;
         }
         PostDataADO post = new PostDataADO();
-        post.DeleteDataPos(No);
+        post.DeleteDataELP(No, Date);
         isOk = true;
         return isOk;
     }
 
     [WebMethod(EnableSession = true)]
-    public static bool InsertData(string pointNo, string station, string area, string factor1, string factor2, string factor3, string iniRead1, string iniRead2, string iniRead3, string insDate, string iniDate, string alert, string alarm, string action, string rem1, string rem2, string rem3)
+    public static bool InsertData(string date, string pointNo, string meaNo, string read1, string read2, string read3, string value, string initial, string normal, string reM, string sensor)
     {
         bool isOk = false;
         if (HttpContext.Current.Session["user"] == null)
@@ -36,14 +36,14 @@ public partial class GIS_Default : System.Web.UI.Page
             return isOk;
         }
         PostDataADO post = new PostDataADO();
-        PosData data = new PosData( pointNo, station, area, factor1, factor2, factor3, iniRead1, iniRead2, iniRead3, insDate, iniDate, alert, alarm, action, rem1, rem2, rem3);
-        post.InsertDataPos(data);
+        ELPData data = new ELPData(date, pointNo, meaNo, read1, read2, read3, value, initial, normal, reM, sensor);
+        post.InsertDataELP(data);
         isOk = true;
         return isOk;
     }
 
     [WebMethod(EnableSession = true)]
-    public static bool UpdateData(string pointNo, string station, string area, string factor1, string factor2, string factor3, string iniRead1, string iniRead2, string iniRead3, string insDate, string iniDate, string alert, string alarm, string action, string rem1, string rem2, string rem3)
+    public static bool UpdateData(string date, string pointNo, string meaNo, string read1, string read2, string read3, string value, string initial, string normal, string reM, string sensor)
     {
         bool isOk = false;
         if (HttpContext.Current.Session["user"] == null)
@@ -51,8 +51,8 @@ public partial class GIS_Default : System.Web.UI.Page
             return isOk;
         }
         PostDataADO post = new PostDataADO();
-        PosData data = new PosData(pointNo, station, area,  factor1, factor2, factor3, iniRead1, iniRead2, iniRead3, insDate, iniDate, alert, alarm, action, rem1, rem2, rem3);
-        post.UpdateDataPos(data);
+        ELPData data = new ELPData( date,  pointNo,  meaNo,  read1,  read2,  read3,  value,  initial,  normal,  reM,  sensor);
+        post.UpdateDataELP(data);
         isOk = true;
         return isOk;
     }
