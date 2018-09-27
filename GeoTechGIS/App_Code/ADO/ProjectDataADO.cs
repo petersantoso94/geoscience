@@ -27,6 +27,36 @@ public class ProjectDataADO
         cmd = new SqlCommand("", con);
     }
 
+    //elp data
+    public List<ELPData> GetELPData()
+    {
+        List<ELPData> list = new List<ELPData>();
+        DataTable DataList = new DataTable();
+
+        cmd.CommandText = "SELECT * FROM ELP";
+        adapter = new SqlDataAdapter(cmd);
+        adapter.Fill(DataList);
+
+        foreach (DataRow item in DataList.Rows)
+        {
+            ELPData data = new ELPData();
+            data.PointNo = item["PointNo"].ToString();
+            data.Date = item["Date"].ToString();
+            data.MeaNo = item["MeaNo"].ToString();
+            data.Read1 = (item["Read1"]).ToString();
+            data.Read2 = (item["Read2"]).ToString();
+            data.Read3 = (item["Read3"]).ToString();
+            data.Value = (item["Value"]).ToString();
+            data.Initial = (item["Initial"]).ToString();
+            data.Normal = (item["Normal"]).ToString();
+            data.ReM = item["ReM"].ToString();
+            data.Sensor = item["Sensor"].ToString();
+            list.Add(data);
+        }
+
+        return list;
+    }
+
     //pos data
     public List<PosData> GetPosData()
     {
