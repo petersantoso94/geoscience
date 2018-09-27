@@ -34,7 +34,7 @@ var filter = {from:"",to:""};
 var setFilter = function (element) {
     filter.from = $("#filterFromDate").val();
     filter.to = $("#filterToDate").val();
-    config.loadFilter();
+    config.load();
 }
 var resetFilter = function (element) {
     filter.from = "";
@@ -177,29 +177,6 @@ var setValueOnModal = function (element) {
 
 var config = {
     load: function () {
-        let setting = {};
-        setting.type = 'post';
-        setting.contentType = 'Application/json; charset=utf-8';
-        setting.data =  "";
-        setting.dataType = 'json';
-        setting.url = 'ELP.aspx/GetELPData';
-        setting.success = function (res) {
-            let ans = res.hasOwnProperty('d') ? res.d : res;
-            if (!ans.isOk) {
-                alert(ans.Message);
-                window.location.href = "../Login.aspx";
-            } else {
-                MainData = ans;
-                config.ShowOnThePage(ans);
-            }
-        };
-        setting.error = function (err) {
-            console.error(err);
-        };
-
-        $.ajax(setting);
-    },
-    loadFilter: function (filter) {
         let setting = {};
         setting.type = 'post';
         setting.contentType = 'Application/json; charset=utf-8';

@@ -58,7 +58,7 @@ public partial class GIS_Default : System.Web.UI.Page
     }
 
     [WebMethod(EnableSession = true)]
-    public static returnELPData GetELPData()
+    public static returnELPData GetELPData(string from = "", string to = "")
     {
         returnELPData package = new returnELPData();
 
@@ -82,7 +82,7 @@ public partial class GIS_Default : System.Web.UI.Page
                 {
                     dao = new ProjectDataADO(item.GetPorjectDB());
                     package.ProjectInfo = item;
-                    package.DataPackage = dao.GetELPData();
+                    package.DataPackage = dao.GetELPData(from,to);
                     package.isOk = true;
                 }
             }
