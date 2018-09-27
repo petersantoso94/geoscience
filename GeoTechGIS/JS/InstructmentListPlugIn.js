@@ -10,7 +10,7 @@ var fileName = '' + forFileNowDate.getFullYear() +
 var ValueTable = $('#valueTable').DataTable({
     'scrollY': '390px',
     'scrollCollapse': false,
-    // 'scrollX': false,
+    'scrollX': true,
     'columnDefs': [{
         'className': 'dt-center',
         'targets': '_all'
