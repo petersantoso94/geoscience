@@ -95,7 +95,8 @@ var submitEdit = function () {
         Alarm1: alert1,
         Alarm2: alert2,
         Work: work,
-        Fail: fail
+        Fail: fail,
+        Email: $("#email").val()
     }
 
     let setting = {};
@@ -134,6 +135,7 @@ var setValueInsert = function () {
 var setValueOnModal = function (element) {
     editOrInsert = "edit";
     let data_no = $(element).data("no");
+    let data_email = $(element).data("email");
     let data_name = $(element).data("name");
     let data_mobile = $(element).data("mobile");
     let data_alert = $(element).data("alert");
@@ -145,6 +147,7 @@ var setValueOnModal = function (element) {
     $("#no").val(data_no);
     $("#name").val(data_name);
     $("#mobileNo").val(data_mobile);
+    $("#email").val(data_email);
     if (data_alert === 'True')
         $("#alert").attr('checked', true);
     if (data_alert1 === 'True')
@@ -215,12 +218,13 @@ var config = {
                 0: element.No,
                 1: element.Name,
                 2: element.MobileNo,
-                3: (element.Alert === 'True' ? '<i class="fa fa-check-circle"></i>' : '<i class="fa fa-times-circle"></i>'),
-                4: (element.Alert1 === 'True' ? '<i class="fa fa-check-circle"></i>' : '<i class="fa fa-times-circle"></i>'),
-                5: (element.Alert2 === 'True' ? '<i class="fa fa-check-circle"></i>' : '<i class="fa fa-times-circle"></i>'),
-                6: (element.WorkSuspension === 'True' ? '<i class="fa fa-check-circle"></i>' : '<i class="fa fa-times-circle"></i>'),
-                7: (element.Fail === 'True' ? '<i class="fa fa-check-circle"></i>' : '<i class="fa fa-times-circle"></i>'),
-                8: '<button class="fa fa-edit" style="margin:10px;" type="button" onclick="setValueOnModal(this)" data-toggle="modal" data-target="#editValue" data-fail="' + element.Fail + '" data-work="' + element.WorkSuspension + '" data-alert2="' + element.Alert2 + '" data-alert1="' + element.Alert1 + '" data-alert="' + element.Alert + '" data-mobile="' + element.MobileNo + '" data-name="' + element.Name + '" data-no="' + element.No + '"></button>' +
+                3: element.Email,
+                4: (element.Alert === 'True' ? '<i class="fa fa-check-circle"></i>' : '<i class="fa fa-times-circle"></i>'),
+                5: (element.Alert1 === 'True' ? '<i class="fa fa-check-circle"></i>' : '<i class="fa fa-times-circle"></i>'),
+                6: (element.Alert2 === 'True' ? '<i class="fa fa-check-circle"></i>' : '<i class="fa fa-times-circle"></i>'),
+                7: (element.WorkSuspension === 'True' ? '<i class="fa fa-check-circle"></i>' : '<i class="fa fa-times-circle"></i>'),
+                8: (element.Fail === 'True' ? '<i class="fa fa-check-circle"></i>' : '<i class="fa fa-times-circle"></i>'),
+                9: '<button class="fa fa-edit" style="margin:10px;" type="button" onclick="setValueOnModal(this)" data-toggle="modal" data-target="#editValue" data-fail="' + element.Fail + '" data-email="' + element.Email + '" data-work="' + element.WorkSuspension + '" data-alert2="' + element.Alert2 + '" data-alert1="' + element.Alert1 + '" data-alert="' + element.Alert + '" data-mobile="' + element.MobileNo + '" data-name="' + element.Name + '" data-no="' + element.No + '"></button>' +
                     '<button class="fas fa-trash-alt" style="margin:10px;" type="button" onclick="deleteData(this)" data-no="' + element.No + '"></button>'
             });
 

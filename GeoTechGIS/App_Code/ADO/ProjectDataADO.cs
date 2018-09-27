@@ -84,6 +84,7 @@ public class ProjectDataADO
             data.Alert2 = (item["Alarm2 Selected"]).ToString();
             data.WorkSuspension = (item["Work Suspension Selected"]).ToString();
             data.Fail = (item["Fail Selected"]).ToString();
+            data.Email = (item["Email"]).ToString();
             list.Add(data);
         }
 

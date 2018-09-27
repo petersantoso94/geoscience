@@ -18,8 +18,14 @@ public class PhoneBookData
     public string Alert2 { get; set; }
     public string WorkSuspension { get; set; }
     public string Fail { get; set; }
+    public string Email { get; set; }
     public PhoneBookData()
     {}
+
+    public PhoneBookData(int no, string name, string mobileNo, string alert, string alert1, string alert2, string workSuspension, string fail, string email) : this(no, name, mobileNo, alert, alert1, alert2, workSuspension, fail)
+    {
+        Email = email;
+    }
 
     public PhoneBookData(int no, string name, string mobileNo, string alert, string alert1, string alert2, string workSuspension, string fail)
     {

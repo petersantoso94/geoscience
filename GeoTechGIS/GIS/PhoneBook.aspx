@@ -145,6 +145,7 @@
                                         <th>No</th>
                                         <th>Name</th>
                                         <th>Mobile Number</th>
+                                        <th>Email</th>
                                         <th>Alert</th>
                                         <th>Alarm1</th>
                                         <th>Alarm2</th>
@@ -190,6 +191,12 @@
                             </div>
                             <div class="col-md-4">
                                 <input type="text" id="mobileNo" />
+                            </div>
+                            <div class="col-md-2">
+                                <label>Email</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" id="email" />
                             </div>
                         </div>
                         <div class="row">

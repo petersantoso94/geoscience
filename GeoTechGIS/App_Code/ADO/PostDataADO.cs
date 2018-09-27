@@ -118,7 +118,7 @@ public class PostDataADO
            ",[Alarm1 Selected] = '" + data.Alert1 + "'" +
            ",[Alarm2 Selected] = '" + data.Alert2 + "'" +
            ",[Work Suspension Selected] = '" + data.WorkSuspension + "'" +
-           ",[Fail Selected] =  '" + data.Fail + "' WHERE No = '" + data.No + "'";
+           ",[Fail Selected] =  '" + data.Fail + "',Email = '"+data.Email+"' WHERE No = '" + data.No + "'";
         con.Open();
         read = cmd.ExecuteReader();
         isOk = read.HasRows ? true : isOk;
@@ -148,7 +148,7 @@ public class PostDataADO
        ", '" + data.Alert1 + "'" +
        ", '" + data.Alert2 + "'" +
        ", '" + data.WorkSuspension + "'" +
-       ", '" + data.Fail + "')";
+       ", '" + data.Fail + "', '" + data.Email + "')";
         con.Open();
         read = cmd.ExecuteReader();
         isOk = read.HasRows ? true : isOk;

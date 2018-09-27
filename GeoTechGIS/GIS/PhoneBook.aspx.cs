@@ -28,7 +28,7 @@ public partial class GIS_Default : System.Web.UI.Page
     }
 
     [WebMethod(EnableSession = true)]
-    public static bool InsertData(string No, string Name, string PhoneNo, string Alert, string Alarm1, string Alarm2, string Work, string Fail)
+    public static bool InsertData(string No, string Name, string PhoneNo, string Alert, string Alarm1, string Alarm2, string Work, string Fail, string Email)
     {
         bool isOk = false;
         if (HttpContext.Current.Session["user"] == null)
@@ -36,14 +36,14 @@ public partial class GIS_Default : System.Web.UI.Page
             return isOk;
         }
         PostDataADO post = new PostDataADO();
-        PhoneBookData data = new PhoneBookData(Convert.ToInt32(No), Name, PhoneNo, Alert, Alarm1, Alarm2, Work, Fail);
+        PhoneBookData data = new PhoneBookData(Convert.ToInt32(No), Name, PhoneNo, Alert, Alarm1, Alarm2, Work, Fail, Email);
         post.InsertDataPhonebook(data);
         isOk = true;
         return isOk;
     }
 
     [WebMethod(EnableSession = true)]
-    public static bool UpdateData(string No, string Name, string PhoneNo, string Alert, string Alarm1, string Alarm2, string Work, string Fail)
+    public static bool UpdateData(string No, string Name, string PhoneNo, string Alert, string Alarm1, string Alarm2, string Work, string Fail, string Email)
     {
         bool isOk = false;
         if (HttpContext.Current.Session["user"] == null)
@@ -51,7 +51,7 @@ public partial class GIS_Default : System.Web.UI.Page
             return isOk;
         }
         PostDataADO post = new PostDataADO();
-        PhoneBookData data = new PhoneBookData(Convert.ToInt32(No), Name, PhoneNo, Alert, Alarm1, Alarm2, Work, Fail);
+        PhoneBookData data = new PhoneBookData(Convert.ToInt32(No), Name, PhoneNo, Alert, Alarm1, Alarm2, Work, Fail,Email);
         post.UpdateDataPhonebook(data);
         isOk = true;
         return isOk;
