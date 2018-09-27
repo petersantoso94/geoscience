@@ -136,6 +136,13 @@
                 <div class="container-fluid margin">
                     <div class="container-fluid">
                         <!--Data List Table Start-->
+                        <h4>Date Filter</h4>
+                        <div class="row container-fluid">
+                            <div class="col-md-3">From: <input type="date" id="filterFromDate"/></div>
+                            <div class="col-md-3">To: <input type="date" id="filterToDate"/></div>
+                            <div class="col-md-2"><button class="btn-secondary" type="button" onclick="setFilter(this)">Filter</button>
+                                <button class="btn-danger" type="button" onclick="resetFilter(this)">Reset</button></div>
+                            </div>
                         <div class="row container-fluid">
                             <button class="fa fa-plus-square" type="button" onclick="setValueInsert(this)" data-toggle="modal" data-target="#editValue">Add ELP Data</button>
                             <!--DataTable Table  Start-->

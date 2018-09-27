@@ -30,6 +30,19 @@
 
     $.ajax(setting);
 }
+var filter = {from:"",to:""};
+var setFilter = function (element) {
+    filter.from = $("#filterFromDate").val();
+    filter.to = $("#filterToDate").val();
+    config.load();
+}
+var resetFilter = function (element) {
+    filter.from = "";
+    filter.to = "";
+    $("#filterFromDate").val("");
+    $("#filterToDate").val("");
+    config.load();
+}
 var editOrInsert = "";
 var deleteData = function (element) {
     let data_no = $(element).data("point");
@@ -165,10 +178,9 @@ var setValueOnModal = function (element) {
 var config = {
     load: function () {
         let setting = {};
-
         setting.type = 'post';
         setting.contentType = 'Application/json; charset=utf-8';
-        setting.data = '';
+        setting.data =  "";
         setting.dataType = 'json';
         setting.url = 'ELP.aspx/GetELPData';
         setting.success = function (res) {

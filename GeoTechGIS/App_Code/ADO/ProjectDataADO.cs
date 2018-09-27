@@ -28,12 +28,14 @@ public class ProjectDataADO
     }
 
     //elp data
-    public List<ELPData> GetELPData()
+    public List<ELPData> GetELPData(string from, string to)
     {
         List<ELPData> list = new List<ELPData>();
         DataTable DataList = new DataTable();
-
-        cmd.CommandText = "SELECT * FROM ELP";
+        if(from != "")
+            cmd.CommandText = "SELECT * FROM ELP WHERE [Date] between '"+from+"' AND '"+to+"'";
+        else
+            cmd.CommandText = "SELECT * FROM ELP";
         adapter = new SqlDataAdapter(cmd);
         adapter.Fill(DataList);
 
