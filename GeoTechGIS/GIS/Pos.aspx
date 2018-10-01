@@ -82,7 +82,7 @@
             height: 30px;
         }
         th { font-size: 12px; }
-td { font-size: 11px; }
+td { font-size: 10px; }
     </style>
 </head>
 <body>
