@@ -256,7 +256,7 @@ var config = {
         });
         Instruments.forEach(function (element) {
             InputArray.push({
-                0: element.Date,
+                0: element.Date.split(' ')[0],
                 1: element.PointNo,
                 2: element.MeaNo,
                 3: element.Read1,
