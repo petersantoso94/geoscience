@@ -24,8 +24,8 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <!-- DataTable -->
-    <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <link href="../CSS/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <script src="../JS/jquery.dataTables.min.js"></script>
 
     <!-- DataTable 的按鈕套件 -->
     <link href="https://cdn.datatables.net/buttons/1.3.1/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
@@ -81,6 +81,11 @@
             width: 200px;
             height: 30px;
         }
+        th { font-size: 12px; }
+td { font-size: 11px; }
+tbody tr.odd {
+    background-color: #616468;
+}
     </style>
 </head>
 <body>
