@@ -82,8 +82,8 @@
             height: 30px;
         }
 
-        th { font-size: 12px; }
-td { font-size: 11px;padding:0px!important; }
+        th { font-size: 13px; }
+td { font-size: 12px;padding:1px!important; }
 .dataTables_info { font-size: 13px; }
 .dataTables_paginate { font-size: 13px; }
     </style>
