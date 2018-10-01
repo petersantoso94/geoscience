@@ -32,7 +32,7 @@
     <script src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
 
     <!-- DataTable JQ套件 -->
-    <link href="https://cdn.datatables.net/1.10.16/css/dataTables.jqueryui.min.css" rel="stylesheet" type="text/css" />
+    <link href="../CSS/dataTables.jqueryui.min.css" rel="stylesheet" type="text/css" />
     <!-- <link href="//code.jquery.com/ui/1.11.4/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" /> -->
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.jqueryui.min.js"></script>
 
