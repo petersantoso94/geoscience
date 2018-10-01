@@ -267,11 +267,11 @@ var config = {
                 8: element.Normal,
                 9: element.ReM,
                 10: element.Sensor,
-                11: '<button class="fa fa-edit" style="margin:10px;" type="button" onclick="setValueOnModal(this)" data-toggle="modal" data-target="#editValue" data-point="' +
+                11: '<button class="fa fa-edit" style="margin-right:4px;" type="button" onclick="setValueOnModal(this)" data-toggle="modal" data-target="#editValue" data-point="' +
                     element.PointNo + '" data-date="' + element.Date + '" data-meano="' + element.MeaNo + '" data-read1="' + element.Read1 + '" data-read2="' +
                     element.Read2 + '" data-read3="' + element.Read3 + '" data-value="' + element.Value + '" data-initial="' + element.Initial + '" data-normal="' +
                     element.Normal + '" data-rem="' + element.ReM + '" data-sensor="' + element.Sensor + '"></button>' +
-                    '<button class="fas fa-trash-alt" style="margin:10px;" type="button" onclick="deleteData(this)" data-point="' + element.PointNo + '" data-date="' + element.Date + '"></button>'
+                    '<button class="fas fa-trash-alt" style="margin-right:4px;" type="button" onclick="deleteData(this)" data-point="' + element.PointNo + '" data-date="' + element.Date + '"></button>'
             });
 
         });

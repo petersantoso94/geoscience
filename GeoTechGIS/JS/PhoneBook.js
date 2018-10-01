@@ -224,8 +224,8 @@ var config = {
                 6: (element.Alert2 === 'True' ? '<i class="fa fa-check-circle"></i>' : '<i class="fa fa-times-circle"></i>'),
                 7: (element.WorkSuspension === 'True' ? '<i class="fa fa-check-circle"></i>' : '<i class="fa fa-times-circle"></i>'),
                 8: (element.Fail === 'True' ? '<i class="fa fa-check-circle"></i>' : '<i class="fa fa-times-circle"></i>'),
-                9: '<button class="fa fa-edit" style="margin:10px;" type="button" onclick="setValueOnModal(this)" data-toggle="modal" data-target="#editValue" data-fail="' + element.Fail + '" data-email="' + element.Email + '" data-work="' + element.WorkSuspension + '" data-alert2="' + element.Alert2 + '" data-alert1="' + element.Alert1 + '" data-alert="' + element.Alert + '" data-mobile="' + element.MobileNo + '" data-name="' + element.Name + '" data-no="' + element.No + '"></button>' +
-                    '<button class="fas fa-trash-alt" style="margin:10px;" type="button" onclick="deleteData(this)" data-no="' + element.No + '"></button>'
+                9: '<button class="fa fa-edit" style="margin-right:4px;" type="button" onclick="setValueOnModal(this)" data-toggle="modal" data-target="#editValue" data-fail="' + element.Fail + '" data-email="' + element.Email + '" data-work="' + element.WorkSuspension + '" data-alert2="' + element.Alert2 + '" data-alert1="' + element.Alert1 + '" data-alert="' + element.Alert + '" data-mobile="' + element.MobileNo + '" data-name="' + element.Name + '" data-no="' + element.No + '"></button>' +
+                    '<button class="fas fa-trash-alt" style="margin-right:4px;" type="button" onclick="deleteData(this)" data-no="' + element.No + '"></button>'
             });
 
         });

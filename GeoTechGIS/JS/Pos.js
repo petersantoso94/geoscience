@@ -243,13 +243,13 @@ var config = {
                 14: element.Rem1,
                 15: element.Rem2,
                 16: element.Rem3,
-                17: '<button class="fa fa-edit" style="margin:10px;" type="button" onclick="setValueOnModal(this)" data-toggle="modal" data-target="#editValue" data-point="' +
+                17: '<button class="fa fa-edit" style="margin-right:4px;" type="button" onclick="setValueOnModal(this)" data-toggle="modal" data-target="#editValue" data-point="' +
                     element.PointNo + '" data-station="' + element.Station + '" data-area="' + element.Area + '" data-factor1="' + element.Factor1 + '" data-factor2="' +
                     element.Factor2 + '" data-factor3="' + element.Factor3 + '" data-iniread1="' + element.IniRead1 + '" data-iniread2="' + element.IniRead2 + '" data-iniread3="' +
                     element.IniRead3 + '" data-insdate="' + element.InsDate + '" data-inidate="' + element.IniDate + '" data-alert="' + element.Alert + '"  data-alarm="' +
                     element.Alarm + '" data-action="' + element.Action + '" data-rem1="' + element.Rem1 + '" data-rem2="' + element.Rem2 + '" data-rem3="' +
                     element.Rem3 + '"></button>' +
-                    '<button class="fas fa-trash-alt" style="margin:10px;" type="button" onclick="deleteData(this)" data-point="' + element.PointNo + '"></button>'
+                    '<button class="fas fa-trash-alt" style="margin-right:4px;" type="button" onclick="deleteData(this)" data-point="' + element.PointNo + '"></button>'
             });
 
         });
