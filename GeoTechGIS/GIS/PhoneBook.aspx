@@ -144,7 +144,7 @@ tbody tr.odd {
                     <div class="container-fluid">
                         <!--Data List Table Start-->
                         <div class="row container-fluid">
-                            <button class="fa fa-plus-square" type="button" onclick="setValueInsert(this)" data-toggle="modal" data-target="#editValue">Add Contact</button>
+                            <button class="fa fa-plus-square" style="margin-bottom:6px;" type="button" onclick="setValueInsert(this)" data-toggle="modal" data-target="#editValue">Add Contact</button>
                             <!--DataTable Table  Start-->
                             <table id="valueTable" class="display" style="width: 100%">
                                 <thead>

@@ -142,14 +142,14 @@ td { font-size: 12px;padding:3px!important; }
                     <div class="container-fluid">
                         <!--Data List Table Start-->
                         <h4>Date Filter</h4>
-                        <div class="row container-fluid">
-                            <div class="col-md-3">From: <input type="date" id="filterFromDate"/></div>
-                            <div class="col-md-3">To: <input type="date" id="filterToDate"/></div>
-                            <div class="col-md-2"><button class="btn-secondary" type="button" onclick="setFilter(this)">Filter</button>
-                                <button class="btn-danger" type="button" onclick="resetFilter(this)">Reset</button></div>
+                        <div class="row">
+                            <div class="col-md-3">From: <input type="date" id="filterFromDate" class="form-control"/></div>
+                            <div class="col-md-3">To: <input type="date" id="filterToDate" class="form-control"/></div>
+                            <div class="col-md-2" style="padding-top:25px;"><button class="btn btn-secondary" type="button" onclick="setFilter(this)">Filter</button>
+                                <button class="btn btn-danger" type="button" onclick="resetFilter(this)">Reset</button></div>
                             </div>
                         <div class="row container-fluid">
-                            <button class="fa fa-plus-square" type="button" onclick="setValueInsert(this)" data-toggle="modal" data-target="#editValue">Add ELP Data</button>
+                            <button class="fa fa-plus-square" style="margin-bottom:6px;margin-top:6px;" type="button" onclick="setValueInsert(this)" data-toggle="modal" data-target="#editValue">Add ELP Data</button>
                             <!--DataTable Table  Start-->
                             <table id="valueTable" class="display" style="width: 100%">
                                 <thead>
