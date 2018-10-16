@@ -17,7 +17,7 @@ public partial class GIS_Default : System.Web.UI.Page
     public static bool DeleteData(string No, string Date)
     {
         bool isOk = false;
-        if (HttpContext.Current.Session["user"] == null)
+        if (HttpContext.Current.Request.Cookies["UserCookies"]["UserID"] == null)
         {
             return isOk;
         }
@@ -31,7 +31,7 @@ public partial class GIS_Default : System.Web.UI.Page
     public static bool InsertData(string date, string pointNo, string meaNo, string read1, string read2, string read3, string value, string initial, string normal, string reM, string sensor)
     {
         bool isOk = false;
-        if (HttpContext.Current.Session["user"] == null)
+        if (HttpContext.Current.Request.Cookies["UserCookies"]["UserID"] == null)
         {
             return isOk;
         }
@@ -46,7 +46,7 @@ public partial class GIS_Default : System.Web.UI.Page
     public static bool UpdateData(string date, string pointNo, string meaNo, string read1, string read2, string read3, string value, string initial, string normal, string reM, string sensor)
     {
         bool isOk = false;
-        if (HttpContext.Current.Session["user"] == null)
+        if (HttpContext.Current.Request.Cookies["UserCookies"]["UserID"] == null)
         {
             return isOk;
         }
@@ -62,7 +62,7 @@ public partial class GIS_Default : System.Web.UI.Page
     {
         returnELPData package = new returnELPData();
 
-        if (HttpContext.Current.Session["user"] == null)
+        if (HttpContext.Current.Request.Cookies["UserCookies"]["UserID"] == null)
         {
             package.isOk = false;
             package.Message = "尚未登入或連線逾時";

@@ -23,6 +23,7 @@ public class LoginADO
     private SqlDataReader read = null;
     private SqlDataAdapter adapter = null;
     HttpContext context;
+    HttpCookie userCookie;
 
     public LoginADO()
     {
@@ -52,6 +53,8 @@ public class LoginADO
             user.Account = ac;
             user.ProjectList = this.GetUserProjectList(ac);
             context.Session.Add("user", user);
+            HttpContext.Current.Response.Cookies["UserCookies"]["UserID"] = ac;
+            HttpContext.Current.Response.Cookies["UserCookies"].Expires = DateTime.Now.AddHours(2);
         }
         return isOk;
     }

@@ -17,7 +17,7 @@ public partial class GIS_InsturctmentList : System.Web.UI.Page
     {
         returnLastData package = new returnLastData();
 
-        if (HttpContext.Current.Session["user"] == null)
+        if (HttpContext.Current.Request.Cookies["UserCookies"]["UserID"] == null)
         {
             package.isOk = false;
             package.Message = "尚未登入或連線逾時";
@@ -77,7 +77,7 @@ public partial class GIS_InsturctmentList : System.Web.UI.Page
     public static returnChartData GetDrawDataStableInterval(int PointIdx, string PointNo, string GageType, int StableRang)
     {
         returnChartData package = new returnChartData();
-        if (HttpContext.Current.Session["user"] == null)
+        if (HttpContext.Current.Request.Cookies["UserCookies"]["UserID"] == null)
         {
             package.isOk = false;
             package.Message = "尚未登入或連線逾時";
@@ -123,7 +123,7 @@ public partial class GIS_InsturctmentList : System.Web.UI.Page
     public static returnChartData GetDrawDataSelfChooseInterval(int PointIdx, string PointNo, string GageType, string StartDate, string EndDate)
     {
         returnChartData package = new returnChartData();
-        if (HttpContext.Current.Session["user"] == null)
+        if (HttpContext.Current.Request.Cookies["UserCookies"]["UserID"] == null)
         {
             package.isOk = false;
             package.Message = "尚未登入或連線逾時";
@@ -171,7 +171,7 @@ public partial class GIS_InsturctmentList : System.Web.UI.Page
     public static returnFilePath GetDownloadPath(string GageType, int DataType, string FromDate, string ToDate)
     {
         returnFilePath package = new returnFilePath();
-        if (HttpContext.Current.Session["user"] == null)
+        if (HttpContext.Current.Request.Cookies["UserCookies"]["UserID"] == null)
         {
             package.isOk = false;
             package.Message = "尚未登入或連線逾時";

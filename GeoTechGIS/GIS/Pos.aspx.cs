@@ -17,7 +17,7 @@ public partial class GIS_Default : System.Web.UI.Page
     public static bool DeleteData(string No)
     {
         bool isOk = false;
-        if (HttpContext.Current.Session["user"] == null)
+        if (HttpContext.Current.Request.Cookies["UserCookies"]["UserID"] == null)
         {
             return isOk;
         }
@@ -31,7 +31,7 @@ public partial class GIS_Default : System.Web.UI.Page
     public static bool InsertData(string pointNo, string station, string area, string factor1, string factor2, string factor3, string iniRead1, string iniRead2, string iniRead3, string insDate, string iniDate, string alert, string alarm, string action, string rem1, string rem2, string rem3)
     {
         bool isOk = false;
-        if (HttpContext.Current.Session["user"] == null)
+        if (HttpContext.Current.Request.Cookies["UserCookies"]["UserID"] == null)
         {
             return isOk;
         }
@@ -46,7 +46,7 @@ public partial class GIS_Default : System.Web.UI.Page
     public static bool UpdateData(string pointNo, string station, string area, string factor1, string factor2, string factor3, string iniRead1, string iniRead2, string iniRead3, string insDate, string iniDate, string alert, string alarm, string action, string rem1, string rem2, string rem3)
     {
         bool isOk = false;
-        if (HttpContext.Current.Session["user"] == null)
+        if (HttpContext.Current.Request.Cookies["UserCookies"]["UserID"] == null)
         {
             return isOk;
         }
@@ -62,7 +62,7 @@ public partial class GIS_Default : System.Web.UI.Page
     {
         returnPosData package = new returnPosData();
 
-        if (HttpContext.Current.Session["user"] == null)
+        if (HttpContext.Current.Request.Cookies["UserCookies"]["UserID"] == null)
         {
             package.isOk = false;
             package.Message = "尚未登入或連線逾時";
