@@ -17,7 +17,7 @@ public partial class GIS_Map : System.Web.UI.Page
     {
         returnLastData package = new returnLastData();
 
-        if (HttpContext.Current.Request.Cookies["UserCookies"]["UserID"] == null)
+        if (HttpContext.Current.Session["user"] == null)
         {
             package.isOk = false;
             package.Message = "尚未登入或連線逾時";
@@ -25,7 +25,7 @@ public partial class GIS_Map : System.Web.UI.Page
         }
 
         ProjectDataADO dao;
-        User user = (User)HttpContext.Current.Session["User"];
+        User user = (User)HttpContext.Current.Session["user"];
         List<Project> projectList = user.ProjectList;
         string projectName = HttpContext.Current.Session["showProjects"].ToString();
 
@@ -78,7 +78,7 @@ public partial class GIS_Map : System.Web.UI.Page
     public static returnChartData GetDrawDataStableInterval(int PointIdx, string PointNo, string GageType, int StableRang)
     {
         returnChartData package = new returnChartData();
-        if (HttpContext.Current.Request.Cookies["UserCookies"]["UserID"] == null)
+        if (HttpContext.Current.Session["user"] == null)
         {
             package.isOk = false;
             package.Message = "尚未登入或連線逾時";
@@ -124,7 +124,7 @@ public partial class GIS_Map : System.Web.UI.Page
     public static returnChartData GetDrawDataPicture(int PointIdx, string PointNo, string GageType)
     {
         returnChartData package = new returnChartData();
-        if (HttpContext.Current.Request.Cookies["UserCookies"]["UserID"] == null)
+        if (HttpContext.Current.Session["user"] == null)
         {
             package.isOk = false;
             package.Message = "尚未登入或連線逾時";
@@ -162,7 +162,7 @@ public partial class GIS_Map : System.Web.UI.Page
     public static returnChartData GetDrawDataSelfChooseInterval(int PointIdx, string PointNo, string GageType, string StartDate, string EndDate)
     {
         returnChartData package = new returnChartData();
-        if (HttpContext.Current.Request.Cookies["UserCookies"]["UserID"] == null)
+        if (HttpContext.Current.Session["user"] == null)
         {
             package.isOk = false;
             package.Message = "尚未登入或連線逾時";

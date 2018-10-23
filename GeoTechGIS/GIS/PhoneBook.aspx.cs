@@ -17,7 +17,7 @@ public partial class GIS_Default : System.Web.UI.Page
     public static bool DeleteData(string No)
     {
         bool isOk = false;
-        if (HttpContext.Current.Request.Cookies["UserCookies"]["UserID"] == null)
+        if (HttpContext.Current.Session["user"] == null)
         {
             return isOk;
         }
@@ -31,7 +31,7 @@ public partial class GIS_Default : System.Web.UI.Page
     public static bool InsertData(string No, string Name, string PhoneNo, string Alert, string Alarm1, string Alarm2, string Work, string Fail, string Email)
     {
         bool isOk = false;
-        if (HttpContext.Current.Request.Cookies["UserCookies"]["UserID"] == null)
+        if (HttpContext.Current.Session["user"] == null)
         {
             return isOk;
         }
@@ -46,7 +46,7 @@ public partial class GIS_Default : System.Web.UI.Page
     public static bool UpdateData(string No, string Name, string PhoneNo, string Alert, string Alarm1, string Alarm2, string Work, string Fail, string Email)
     {
         bool isOk = false;
-        if (HttpContext.Current.Request.Cookies["UserCookies"]["UserID"] == null)
+        if (HttpContext.Current.Session["user"] == null)
         {
             return isOk;
         }
@@ -62,7 +62,7 @@ public partial class GIS_Default : System.Web.UI.Page
     {
         returnPhoneBookData package = new returnPhoneBookData();
 
-        if (HttpContext.Current.Request.Cookies["UserCookies"]["UserID"] == null)
+        if (HttpContext.Current.Session["user"] == null)
         {
             package.isOk = false;
             package.Message = "尚未登入或連線逾時";
@@ -70,7 +70,7 @@ public partial class GIS_Default : System.Web.UI.Page
         }
 
         ProjectDataADO dao;
-        User user = (User)HttpContext.Current.Session["User"];
+        User user = (User)HttpContext.Current.Session["user"];
         List<Project> projectList = user.ProjectList;
         string projectName = HttpContext.Current.Session["showProjects"].ToString();
 

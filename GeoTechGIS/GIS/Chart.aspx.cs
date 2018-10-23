@@ -17,7 +17,7 @@ public partial class GIS_Chart : System.Web.UI.Page
     {
         returnLastData package = new returnLastData();
 
-        if (HttpContext.Current.Request.Cookies["UserCookies"]["UserID"] == null)
+        if (HttpContext.Current.Session["user"] == null)
         {
             package.isOk = false;
             package.Message = "尚未登入或連線逾時";
