@@ -10,7 +10,9 @@ using System.IO;
 public partial class Login : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
-    { }
+    {
+        ExcelWritter.getExcelFile();
+    }
 
     //帳號驗證
     [WebMethod(EnableSession = true)]
