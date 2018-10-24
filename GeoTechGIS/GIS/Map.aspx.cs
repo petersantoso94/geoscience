@@ -85,7 +85,7 @@ public partial class GIS_Map : System.Web.UI.Page
             return package;
         }
 
-        User user = (User)HttpContext.Current.Session["User"];
+        User user = (User)HttpContext.Current.Session["user"];
         List<Project> projectList = user.ProjectList;
         string projectName = HttpContext.Current.Session["showProjects"].ToString();
         ChartDataADO chart;
@@ -131,7 +131,7 @@ public partial class GIS_Map : System.Web.UI.Page
             return package;
         }
 
-        User user = (User)HttpContext.Current.Session["User"];
+        User user = (User)HttpContext.Current.Session["user"];
         List<Project> projectList = user.ProjectList;
         string projectName = HttpContext.Current.Session["showProjects"].ToString();
         ChartDataADO chart;
@@ -169,7 +169,7 @@ public partial class GIS_Map : System.Web.UI.Page
             return package;
         }
 
-        User user = (User)HttpContext.Current.Session["User"];
+        User user = (User)HttpContext.Current.Session["user"];
         List<Project> projectList = user.ProjectList;
         string projectName = HttpContext.Current.Session["showProjects"].ToString();
         ChartDataADO chart;

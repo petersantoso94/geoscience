@@ -29,7 +29,7 @@ public partial class Login : System.Web.UI.Page
     [WebMethod(EnableSession = true)]
     public static bool checkSession()
     {
-        return HttpContext.Current.Session["name"] != null ? true : false;
+        return HttpContext.Current.Session["user"] != null ? true : false;
     }
 
     //測試用

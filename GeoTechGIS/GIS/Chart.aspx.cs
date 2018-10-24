@@ -25,7 +25,7 @@ public partial class GIS_Chart : System.Web.UI.Page
         }
 
         ProjectDataADO dao;
-        User user = (User)HttpContext.Current.Session["User"];
+        User user = (User)HttpContext.Current.Session["user"];
         List<Project> projectList = user.ProjectList;
         string projectName = HttpContext.Current.Session["showProjects"].ToString();
 
