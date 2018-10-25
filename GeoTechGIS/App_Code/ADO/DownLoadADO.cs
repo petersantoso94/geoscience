@@ -28,6 +28,36 @@ public class DownLoadADO
         con = new SqlConnection(config);
         cmd = new SqlCommand("", con);
     }
+
+    public string getExcelPathByTypeArea(string DataType, string Area, string StartDate, string EndDate)
+    {
+        string[][][] DatePointNoList;
+        List<string> AllDateList = new List<string>();
+        List<string> PointNoList = new List<string>();
+        string FileName = DataType + "-" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".csv";
+        string ProjectName = HttpContext.Current.Session["showProjects"].ToString();
+        string makeFilePath = HttpContext.Current.Server.MapPath("../Projects/" + ProjectName + "/Data/").ToString() + FileName;
+        string FrontPath = "../Projects/" + ProjectName + "/Data/" + FileName;
+
+        StartDate += " 00:00:00";
+        EndDate += " 23:59:59";
+
+        PointNoList = this.GetMRTPointNoListByArea(Area, DataType);
+        AllDateList = this.GetDateList(DataType, StartDate, EndDate, PointNoList);
+        DatePointNoList = this.GetPointNoData(PointNoList, DataType, StartDate, EndDate);
+
+        if (DatePointNoList.Length == 0) return "non";
+
+        if (this.SaveFile(DatePointNoList, AllDateList, PointNoList, makeFilePath))
+        {
+            return FrontPath;
+        }
+        else
+        {
+            return "non";
+        }
+    }
+
     //MRT單一種類儀器下資料下載START
     public string getGeoMrtOneTypeDownPath(int DataType, string GageType, string StartDate, string EndDate)
     {
@@ -213,6 +243,49 @@ public class DownLoadADO
         return list;
     }
 
+    private List<string> GetDateList(string GageType, string startDate, string EndDate, List<string> Point)
+    {
+        List<string> list = new List<string>();
+        DataTable table = new DataTable();
+        string joined = "'" + string.Join("','", Point) + "'";
+        cmd.CommandText = "SELECT Date " +
+                          "FROM " + GageType + " " +
+                          "WHERE (Date BETWEEN '" + startDate + "' " +
+                          "AND '" + EndDate + "') AND PointNo IN (" + joined + ") " +
+                          "ORDER BY Date";
+        adapter = new SqlDataAdapter(cmd);
+        adapter.Fill(table);
+
+        foreach (DataRow item in table.Rows)
+        {
+            string temp = Convert.ToDateTime(item["Date"]).ToString("yyyy/MM/dd HH:mm:ss");
+            list.Add(temp);
+        }
+
+        return list;
+    }
+
+    private List<string> GetMRTPointNoListByArea(string area = "", string type = "")
+    {
+        List<string> list = new List<string>();
+        DataTable table = new DataTable();
+
+        cmd.CommandText = "SELECT DISTINCT(PointNo) " +
+                          "FROM Pos" + type + " " +
+                          "WHERE Area LIKE '%" + area + "%' " +
+                          "ORDER BY PointNo";
+        adapter = new SqlDataAdapter(cmd);
+        adapter.Fill(table);
+
+        foreach (DataRow item in table.Rows)
+        {
+            string temp = item["PointNo"].ToString();
+            list.Add(temp);
+        }
+
+        return list;
+    }
+
     private List<string> GetMRTPointNoList(string GageType)
     {
         List<string> list = new List<string>();
@@ -231,6 +304,48 @@ public class DownLoadADO
         }
 
         return list;
+    }
+
+    private string[][][] GetPointNoData(List<string> PointNo, string DataType, string StartDate, string EndDate)
+    {
+        string[][][] DatePointNoList;
+
+        DatePointNoList = new string[PointNo.Count][][];
+
+        for (int i = 0, len = PointNo.Count; i < len; i++)
+        {
+            DataTable table = new DataTable();
+            // value:0 read:1
+            if (DataType == "SP")
+                cmd.CommandText = "SELECT Date, Settle AS Value " +
+                            "FROM SP WHERE(PointNo = '" + PointNo[i] + "') " +
+                            "AND (Date BETWEEN '" + StartDate + "' AND '" + EndDate + "') " +
+                            "ORDER BY Date";
+            else
+                cmd.CommandText = "SELECT Date, Value " +
+                            "FROM " + DataType + "  " +
+                            "WHERE(PointNo = '" + PointNo[i] + "') " +
+                            "AND (Date BETWEEN '" + StartDate + "' AND '" + EndDate + "') " +
+                            "ORDER BY Date";
+
+
+            adapter = new SqlDataAdapter(cmd);
+            adapter.Fill(table);
+
+            DatePointNoList[i] = new string[table.Rows.Count][];
+            int index = 0;
+            foreach (DataRow item in table.Rows)
+            {
+                DatePointNoList[i][index] = new string[2];
+                DatePointNoList[i][index][0] = Convert.ToDateTime(item["Date"]).ToString("yyyy/MM/dd HH:mm:ss");
+                DatePointNoList[i][index][1] = item["Value"].ToString();
+
+                index++;
+            }
+        }
+
+
+        return DatePointNoList;
     }
 
     private string[][][] GetMRTPointNoDateValue(List<string> PointNo, int DataType, string GageType, string StartDate, string EndDate)
@@ -320,25 +435,24 @@ public class DownLoadADO
     {
         bool isOk = false;
         StreamWriter sw = new StreamWriter(SavePath, false, Encoding.Default);
-        string Pan = "Date";
+        string Pan = "Point No";
 
-        for (int i = 0, length = PointNo.Count; i < length; i++)
+        for (int i = 0, length = Date.Count; i < length; i++)
         {
-            Pan += "," + PointNo[i];
+            Pan += "," + Date[i];
         }
         sw.WriteLine(Pan);
 
-        for (int i = 0, dateLen = Date.Count; i < dateLen; i++)
+        for (int j = 0, valueLen = DataPackage.Length; j < valueLen; j++)
         {
-            Pan = Date[i];
-
-            for (int j = 0, valueLen = DataPackage.Length; j < valueLen; j++)
+            Pan = PointNo[j];
+            if (DataPackage[j].Length == 0)
             {
-                if (DataPackage[j].Length == 0)
-                {
-                    Pan += ", ";
-                    continue;
-                }
+                Pan += ", ";
+                continue;
+            }
+            for (int i = 0, length = Date.Count; i < length; i++)
+            {
                 for (int k = 0, checkLen = DataPackage[j].Length; k < checkLen; k++)
                 {
                     if (DataPackage[j][k][0].Equals(Date[i]))
@@ -346,15 +460,13 @@ public class DownLoadADO
                         Pan += "," + DataPackage[j][k][1];
                         break;
                     }
-                    else if (valueLen.Equals(k - 1))
-                    {
-                        Pan += ", ";
-                        break;
-                    }
+
                 }
             }
+            Pan += ", ";
             sw.WriteLine(Pan);
         }
+
 
         sw.Close();
         isOk = true;

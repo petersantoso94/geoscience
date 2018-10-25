@@ -185,7 +185,8 @@
                                 <select class="form-control" id="holeNo">
                                 </select>
                             </div>
-                            <div class="col-md-2" style="padding-top: 25px;">
+                            <div class="col-md-2" style="padding-top: 30px;">
+                                <button class="btn btn-primary" type="button" onclick="submit_filter(this)">Export Excel</button>
                                 <button class="btn btn-danger" type="button" onclick="resetFilter(this)">Reset</button>
                             </div>
                         </div>
