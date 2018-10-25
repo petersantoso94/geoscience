@@ -27,13 +27,53 @@ public class ProjectDataADO
         cmd = new SqlCommand("", con);
     }
 
+    //hole data
+    public List<string> GetHoleData(string area = "")
+    {
+        List<string> list = new List<string>();
+        DataTable DataList = new DataTable();
+        if (area != "")
+        {
+            cmd.CommandText = "SELECT DISTINCT(HoleNo) FROM PosSid WHERE Area LIKE '%"+ area + "%'";
+        }
+
+        adapter = new SqlDataAdapter(cmd);
+        adapter.Fill(DataList);
+
+        foreach (DataRow item in DataList.Rows)
+        {
+            list.Add(item["HoleNo"].ToString());
+        }
+        return list;
+    }
+
+    //location data
+    public List<string> GetLocationData(string dataType = "")
+    {
+        List<string> list = new List<string>();
+        DataTable DataList = new DataTable();
+        if (dataType != "")
+        {
+                cmd.CommandText = "SELECT DISTINCT(Area) FROM Pos" + dataType; ;
+        }
+
+        adapter = new SqlDataAdapter(cmd);
+        adapter.Fill(DataList);
+
+        foreach (DataRow item in DataList.Rows)
+        {
+            list.Add(item["Area"].ToString());
+        }
+        return list;
+    }
+
     //elp data
     public List<ELPData> GetELPData(string from = "", string to = "")
     {
         List<ELPData> list = new List<ELPData>();
         DataTable DataList = new DataTable();
-        if(from != "")
-            cmd.CommandText = "SELECT * FROM ELP WHERE [Date] between '"+from+"' AND '"+to+"'";
+        if (from != "")
+            cmd.CommandText = "SELECT * FROM ELP WHERE [Date] between '" + from + "' AND '" + to + "'";
         else
             cmd.CommandText = "SELECT * FROM ELP";
         adapter = new SqlDataAdapter(cmd);
