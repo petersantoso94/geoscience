@@ -29,6 +29,37 @@ public class DownLoadADO
         cmd = new SqlCommand("", con);
     }
 
+    public string getExcelPathByHoleNo(string HoleNo, string StartDate, string EndDate)
+    {
+        string DataType = "SID";
+        string[][][] DatePointNoList;
+        string[][] MeaDateList;
+        List<string> AllDateList = new List<string>();
+        List<string> PointNoList = new List<string>();
+        List<string> MeaNoList = new List<string>();
+        string FileName = DataType + "-" + HoleNo+"-"+ DateTime.Now.ToString("yyyyMMddHHmmss") + ".csv";
+        string ProjectName = HttpContext.Current.Session["showProjects"].ToString();
+        string makeFilePath = HttpContext.Current.Server.MapPath("../Projects/" + ProjectName + "/Data/").ToString() + FileName;
+        string FrontPath = "../Projects/" + ProjectName + "/Data/" + FileName;
+
+        StartDate += " 00:00:00";
+        EndDate += " 23:59:59";
+
+        MeaDateList = this.GetMRTMeaNo(HoleNo,StartDate,EndDate);
+        DatePointNoList = this.GetDataPerHole(MeaDateList);
+
+        if (DatePointNoList.Length == 0) return "non";
+
+        if (this.SaveFileSID(DatePointNoList,MeaDateList, makeFilePath))
+        {
+            return FrontPath;
+        }
+        else
+        {
+            return "non";
+        }
+    }
+
     public string getExcelPathByTypeArea(string DataType, string Area, string StartDate, string EndDate)
     {
         string[][][] DatePointNoList;
@@ -242,13 +273,14 @@ public class DownLoadADO
 
         return list;
     }
+    
 
     private List<string> GetDateList(string GageType, string startDate, string EndDate, List<string> Point)
     {
         List<string> list = new List<string>();
         DataTable table = new DataTable();
         string joined = "'" + string.Join("','", Point) + "'";
-        cmd.CommandText = "SELECT Date " +
+        cmd.CommandText = "SELECT DISTINCT(Date) " +
                           "FROM " + GageType + " " +
                           "WHERE (Date BETWEEN '" + startDate + "' " +
                           "AND '" + EndDate + "') AND PointNo IN (" + joined + ") " +
@@ -260,6 +292,58 @@ public class DownLoadADO
         {
             string temp = Convert.ToDateTime(item["Date"]).ToString("yyyy/MM/dd HH:mm:ss");
             list.Add(temp);
+        }
+
+        return list;
+    }
+
+    private string[][][] GetDataPerHole(string[][] meano )
+    {
+        string[][][] list = new string[meano.Length][][];
+        for (int i = 0; i < meano.Length; i++)
+        {
+            DataTable table = new DataTable();
+            cmd.CommandText = "SELECT DepthNo,DispA " +
+                              "FROM HoleRec " +
+                              "WHERE MeaNo = '" + meano[i][0] + "' ORDER BY DepthNo";
+            adapter = new SqlDataAdapter(cmd);
+            adapter.Fill(table);
+
+            int counter = 0;
+            list[i] = new string[table.Rows.Count][];
+            foreach (DataRow item in table.Rows)
+            {
+                list[i][counter] = new string[2];
+                list[i][counter][0] = item["DepthNo"].ToString();
+                list[i][counter][1] = item["DispA"].ToString();
+                counter++;
+            }
+        }
+
+        return list;
+    }
+
+    private string[][] GetMRTMeaNo(string holeno = "", string from = "", string to = "")
+    {
+        string[][] list ;
+        DataTable table = new DataTable();
+
+        cmd.CommandText = "SELECT MeaNo,Date " +
+                          "FROM HoleDesc " +
+                          "WHERE HoleNo LIKE '%" + holeno + "%' " +
+                          "AND (Date BETWEEN '" + from + "' AND '" + to + "') " +
+                          "ORDER BY MeaNo";
+        adapter = new SqlDataAdapter(cmd);
+        adapter.Fill(table);
+
+        int counter = 0;
+        list = new string[table.Rows.Count][];
+        foreach (DataRow item in table.Rows)
+        {
+            list[counter] = new string[2];
+            list[counter][0] = item["MeaNo"].ToString();
+            list[counter][1] = item["Date"].ToString();
+            counter++;
         }
 
         return list;
@@ -429,6 +513,49 @@ public class DownLoadADO
 
 
         return DatePointNoList;
+    }
+
+    private bool SaveFileSID(string[][][] DataPackage, string[][] MeaDate, string SavePath)
+    {
+        bool isOk = false;
+        StreamWriter sw = new StreamWriter(SavePath, false, Encoding.Default);
+        string Pan = "Elevation (m)";
+        List<string> elevation = new List<string>();
+        for (int i = 0, length = MeaDate.Length; i < length; i++)
+        {
+            Pan += "," + MeaDate[i][1];
+        }
+        sw.WriteLine(Pan);
+        for(double i = 0; i <= 60; i+=0.50)
+        {
+            elevation.Add(String.Format("{0:0.00}", i));
+        }
+
+        for (int j = 0, valueLen = elevation.Count; j < valueLen; j++)
+        {
+            Pan = elevation[j];
+            for (int i = 0, length = MeaDate.Length; i < length; i++)
+            {
+                for (int k = 0, checkLen = DataPackage[i].Length; k < checkLen; k++)
+                {
+                    string temp = String.Format("{0:0.00}", (Convert.ToDouble(DataPackage[i][k][0]) * 0.5));
+                    if (temp.Equals(elevation[j]))
+                    {
+                        Pan += "," + DataPackage[i][k][1];
+                        break;
+                    }
+
+                }
+            }
+            Pan += ", ";
+            sw.WriteLine(Pan);
+        }
+
+
+        sw.Close();
+        isOk = true;
+
+        return isOk;
     }
 
     private bool SaveFile(string[][][] DataPackage, List<string> Date, List<string> PointNo, string SavePath)

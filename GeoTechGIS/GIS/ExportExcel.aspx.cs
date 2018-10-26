@@ -14,6 +14,41 @@ public partial class GIS_Default : System.Web.UI.Page
     }
 
     [WebMethod(EnableSession = true)]
+    public static returnFilePath GetExcelPathSid(string from = "", string to = "", string holeno = "")
+    {
+        returnFilePath package = new returnFilePath();
+        if (HttpContext.Current.Session["user"] == null)
+        {
+            package.isOk = false;
+            package.Message = "尚未登入或連線逾時";
+            return package;
+        }
+        User user = (User)HttpContext.Current.Session["user"];
+        List<Project> projectList = user.ProjectList;
+        string projectName = HttpContext.Current.Session["showProjects"].ToString();
+        DownLoadADO DownFile;
+        try
+        {
+            foreach (Project item in projectList)
+            {
+                if (item.ProjectName.Equals(projectName))
+                {
+                    DownFile = new DownLoadADO(item.GetPorjectDB());
+                    package.Path = DownFile.getExcelPathByHoleNo(holeno, from, to);
+                    package.isOk = true;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            package.Message = ex.Message.ToString();
+            package.Message += "資料處理錯誤，請重新登入";
+            package.isOk = false;
+        }
+        return package;
+    }
+
+    [WebMethod(EnableSession = true)]
     public static returnFilePath GetExcelPath(string from = "", string to = "", string area = "", string type = "")
     {
         returnFilePath package = new returnFilePath();
