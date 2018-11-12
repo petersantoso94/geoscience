@@ -171,7 +171,7 @@
                                 <select class="form-control" id="dataType">
                                     <option value="SP">Settlement Point (SP)</option>
                                     <option value="SR">Extensometer (SR)</option>
-                                    <option value="SID">Inclinometer (SID)</option>
+                                    <option value="Sid">Inclinometer (SID)</option>
                                     <option value="ELP">Piezometer (ELP)</option>
                                 </select>
                             </div>
