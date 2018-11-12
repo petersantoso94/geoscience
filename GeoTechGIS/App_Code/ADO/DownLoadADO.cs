@@ -37,10 +37,12 @@ public class DownLoadADO
         List<string> AllDateList = new List<string>();
         List<string> PointNoList = new List<string>();
         List<string> MeaNoList = new List<string>();
-        string FileName = DataType + "-" + HoleNo+"-"+ DateTime.Now.ToString("yyyyMMddHHmmss") + ".csv";
+        string FileNameTarget = DataType + "-" + HoleNo+"-"+ DateTime.Now.ToString("yyyyMMddHHmmss") + ".xlsx";
+        string FileName = DataType + ".xlsx";
         string ProjectName = HttpContext.Current.Session["showProjects"].ToString();
         string makeFilePath = HttpContext.Current.Server.MapPath("../Projects/" + ProjectName + "/Data/").ToString() + FileName;
-        string FrontPath = "../Projects/" + ProjectName + "/Data/" + FileName;
+        string makeFilePathTarget = HttpContext.Current.Server.MapPath("../Projects/" + ProjectName + "/Data/").ToString() + FileNameTarget;
+        string FrontPath = "../Projects/" + ProjectName + "/Data/" + FileNameTarget;
 
         StartDate += " 00:00:00";
         EndDate += " 23:59:59";
@@ -49,8 +51,7 @@ public class DownLoadADO
         DatePointNoList = this.GetDataPerHole(MeaDateList);
 
         if (DatePointNoList.Length == 0) return "non";
-
-        if (this.SaveFileSID(DatePointNoList,MeaDateList, makeFilePath))
+        if (ExcelWritter.writeExcelSID(DatePointNoList, MeaDateList, makeFilePath, makeFilePathTarget))
         {
             return FrontPath;
         }
@@ -65,10 +66,12 @@ public class DownLoadADO
         string[][][] DatePointNoList;
         List<string> AllDateList = new List<string>();
         List<string> PointNoList = new List<string>();
-        string FileName = DataType + "-" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".csv";
+        string FileNameTarget = DataType + "-" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xlsx";
+        string FileName = DataType+ ".xlsx";
         string ProjectName = HttpContext.Current.Session["showProjects"].ToString();
         string makeFilePath = HttpContext.Current.Server.MapPath("../Projects/" + ProjectName + "/Data/").ToString() + FileName;
-        string FrontPath = "../Projects/" + ProjectName + "/Data/" + FileName;
+        string makeFilePathTarget = HttpContext.Current.Server.MapPath("../Projects/" + ProjectName + "/Data/").ToString() + FileNameTarget;
+        string FrontPath = "../Projects/" + ProjectName + "/Data/" + FileNameTarget;
 
         StartDate += " 00:00:00";
         EndDate += " 23:59:59";
@@ -79,7 +82,7 @@ public class DownLoadADO
 
         if (DatePointNoList.Length == 0) return "non";
 
-        if (this.SaveFile(DatePointNoList, AllDateList, PointNoList, makeFilePath))
+        if (ExcelWritter.writeExcel(DatePointNoList, AllDateList, PointNoList, makeFilePath,makeFilePathTarget,DataType))
         {
             return FrontPath;
         }
