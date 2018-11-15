@@ -1,4 +1,4 @@
-﻿
+﻿$('.loading').hide();
 var Type = { dataType: "SP" };
 var area = { area: "" };
 var date = { from: "", to: "" };
@@ -17,6 +17,7 @@ var resetFilter = function (element) {
 }
 
 var submit_filter = function (element) {
+    $('.loading').show();
     let from_ = $("#filterFromDate").val();
     let to_ = $("#filterToDate").val();
     let area_ = $("#location").val();
@@ -48,6 +49,7 @@ var submit_filter = function (element) {
             ans = res;
         }
         if (ans.isOk) {
+            $('.loading').hide();
             window.location.href = ans.Path;
         } else {
             alert("Session Expired, Please Re-Login");
