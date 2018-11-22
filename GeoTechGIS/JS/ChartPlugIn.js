@@ -4,29 +4,9 @@
 var nowDate = new Date();
 var FromDate = new Date(nowDate.getFullYear(), nowDate.getMonth() - 1, nowDate.getDate()); // 往前1個月
 
-var chartFromDate = $('#chartFromDate').datepicker({
-    dateFormat: 'yy/mm/dd',
-    autoSize: true,
-    changeMonth: true,
-    changeYear: true,
-    showOtherMonths: true,
-    //selectOtherMonths: true,
-    showMonthAfterYear: true
-}).on('change', function () {
-    chartToDate.datepicker('option', 'minDate', getDate(this))
-    // console.log(this);
-}).datepicker('setDate', FromDate);
+var chartFromDate = $('#chartFromDate').datetimepicker();
 
-var chartToDate = $('#chartToDate').datepicker({
-    dateFormat: 'yy/mm/dd',
-    autoSize: true,
-    changeMonth: true,
-    changeYear: true,
-    showOtherMonths: true,
-    //selectOtherMonths: true,
-    showMonthAfterYear: true,
-    minDate: FromDate
-}).datepicker('setDate', nowDate);
+var chartToDate = $('#chartToDate').datetimepicker();
 
 var dateFormat = 'yy/mm/dd';
 

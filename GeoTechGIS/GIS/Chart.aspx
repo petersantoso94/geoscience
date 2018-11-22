@@ -61,6 +61,7 @@
         <script src="https://code.highcharts.com/modules/exporting.js"></script>
         <script src="https://code.highcharts.com/modules/no-data-to-display.js"></script>
         <!-- 自製CSS -->
+        <link rel="stylesheet" type="text/css" href="../css/jquery.datetimepicker.css" />
         <link rel="stylesheet" href="../css/main.css" />
     </head>
 
@@ -300,6 +301,7 @@
         crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
         crossorigin="anonymous"></script>
+    <script src="../JS/jquery.datetimepicker.full.min.js"></script>
     <script src="../JS/ChartPlugIn.js"></script>
     <script src="../JS/Chart.js"></script>
 
