@@ -25,7 +25,7 @@ public partial class GIS_Chart : System.Web.UI.Page
         }
 
         ProjectDataADO dao;
-        User user = (User)HttpContext.Current.Session["user"];
+        User user = (User)HttpContext.Current.Session["User"];
         List<Project> projectList = user.ProjectList;
         string projectName = HttpContext.Current.Session["showProjects"].ToString();
 
@@ -59,6 +59,53 @@ public partial class GIS_Chart : System.Web.UI.Page
             package.Message = ex.Message.ToString();
             package.isOk = false;
         }
+
+        return package;
+    }
+
+    [WebMethod(EnableSession = true)]
+    public static returnChartData GetDrawDataSelfChooseInterval(int PointIdx, string PointNo, string GageType, string StartDate, string EndDate)
+    {
+        returnChartData package = new returnChartData();
+        if (HttpContext.Current.Session["user"] == null)
+        {
+            package.isOk = false;
+            package.Message = "尚未登入或連線逾時";
+            return package;
+        }
+
+        User user = (User)HttpContext.Current.Session["User"];
+        List<Project> projectList = user.ProjectList;
+        string projectName = HttpContext.Current.Session["showProjects"].ToString();
+        ChartDataADO chart;
+
+        try
+        {
+            foreach (Project item in projectList)
+            {
+                if (item.ProjectName.Equals(projectName))
+                {
+                    chart = new ChartDataADO(item.GetPorjectDB());
+                    switch (item.DataBaseStyle)
+                    {
+                        case 0:
+                            package.ChartData = chart.GetGeoAutoSelectedIntervalToDraw(PointIdx, GageType, StartDate, EndDate);
+                            break;
+                        case 1:
+                            package.ChartData = chart.GetGeoMRTSelectedIntervalToDraw(PointNo, GageType, StartDate, EndDate);
+                            break;
+                    }
+                    package.isOk = true;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            //package.message = "資料處理錯誤，請重新登入";
+            package.Message = ex.Message.ToString();
+            package.isOk = false;
+        }
+
 
         return package;
     }
