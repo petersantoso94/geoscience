@@ -468,7 +468,7 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-7" style="padding-left:70px">
                                         <label>
                                             From:&nbsp;&nbsp;
                                             <input type="text" id="fromDate" />
