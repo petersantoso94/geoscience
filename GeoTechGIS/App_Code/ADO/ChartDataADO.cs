@@ -174,8 +174,8 @@ public class ChartDataADO
         List<DrawData> list = new List<DrawData>();
         DataTable table = new DataTable();
 
-        StartDate += " 00:00:00";
-        EndDate += " 00:00:00";
+        //StartDate += " 00:00:00";
+        //EndDate += " 00:00:00";
 
         //一般版本
         //cmd.CommandText = "SELECT ListData.Date, Data.Value " +

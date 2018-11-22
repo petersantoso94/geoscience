@@ -4,9 +4,13 @@
 var nowDate = new Date();
 var FromDate = new Date(nowDate.getFullYear(), nowDate.getMonth() - 1, nowDate.getDate()); // 往前1個月
 
-var chartFromDate = $('#chartFromDate').datetimepicker();
+var chartFromDate = $('#chartFromDate').datetimepicker({
+    format: 'Y/m/d h:m:s',
+});
 
-var chartToDate = $('#chartToDate').datetimepicker();
+var chartToDate = $('#chartToDate').datetimepicker({
+    format: 'Y/m/d h:m:s',
+});
 
 var dateFormat = 'yy/mm/dd';
 

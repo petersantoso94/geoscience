@@ -186,6 +186,8 @@ var config = {
         return Items;
     },
     DrawListener: $('button#chartDrawChart').on('click', function () {
+        console.log(chartFromDate.val());
+        console.log(chartToDate.val());
         let PointNoTarget = $('option:selected', 'select#chartSelectInstrument').val(),
             fromDate = chartFromDate.val(),
             toDate = chartToDate.val(),
@@ -230,6 +232,7 @@ var config = {
         AjaxSetting.dataType = 'json';
         AjaxSetting.success = function (res) {
             ans = res.hasOwnProperty('d') ? res.d : res;
+            console.log(ans)
             //console.log(ans);
             if (!ans.isOk) {
 
