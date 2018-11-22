@@ -23,15 +23,15 @@ var submit_filter = function (element) {
     let area_ = $("#location").val();
     let DataFormat = {};
     DataFormat = {
-        from: "2007-01-01",
-        to: "2008-01-01",
+        from: from_,
+        to: to_,
         area: area.area,
         type: Type.dataType
     };
     if (Type.dataType == "Sid") {
         DataFormat = {
-            from: "2003-01-01",
-            to: "2018-01-01",
+            from: from_,
+            to: to_,
             holeno: $("#holeNo").val()
         };
     }
