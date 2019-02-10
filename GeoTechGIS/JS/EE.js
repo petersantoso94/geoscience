@@ -1,31 +1,27 @@
 ﻿$('.loading').hide();
 var Type = { dataType: "SP" };
-var area = { area: "" };
+var point = { no: "" };
 var date = { from: "", to: "" };
 var url = "GetExcelPath";
 
 var resetFilter = function (element) {
     $("#filterFromDate").val("");
     $("#filterToDate").val("");
-    $("#location").html("");
     $("#holeNo").html("");
     $("#dataType").val("SP");
-    area = { area: "" };
     Type = { dataType: "SP" };
     date = { from: "", to: "" };
-    $("#holeContainer").hide();
 }
 
 var submit_filter = function (element) {
     $('.loading').show();
     let from_ = $("#filterFromDate").val();
     let to_ = $("#filterToDate").val();
-    let area_ = $("#location").val();
     let DataFormat = {};
     DataFormat = {
         from: from_,
         to: to_,
-        area: area.area,
+        pointno: $("#holeNo").val(),
         type: Type.dataType
     };
     if (Type.dataType == "Sid") {
@@ -50,10 +46,15 @@ var submit_filter = function (element) {
         }
         if (ans.isOk) {
             $('.loading').hide();
-            window.location.href = ans.Path;
+            if (ans.Path == "non") {
+                $('.loading').hide();
+                alert('Data is empty for ' + $("#holeNo").val());
+            } else {
+                window.location.href = ans.Path;
+            }
         } else {
-            alert("Session Expired, Please Re-Login");
-            window.location.href = "../Login.aspx";
+            $('.loading').hide();
+            alert('Data is empty for ' + $("#holeNo").val());
         }
     };
     setting.error = function (err) {
@@ -65,23 +66,13 @@ var submit_filter = function (element) {
 $("#dataType").on("change", function () {
 
     Type.dataType = $(this).val();
-    $("#location").html("");
-
+    $("#holeNo").html("");
     if ($(this).val() == "Sid") {
         url = "GetExcelPathSid";
-        $("#holeContainer").show();
-        getLocationData.load();
+        getHoleNo.load();
     } else {
         url = "GetExcelPath";
-        $("#holeContainer").hide();
-        getLocationData.load();
-    }
-})
-
-$("#location").on("change", function () {
-    area.area = $(this).val();
-    if (Type.dataType == "Sid") {
-        getHoleNo.load();
+        GetPointData.load();
     }
 })
 
@@ -90,7 +81,6 @@ var getHoleNo = {
         let setting = {};
         setting.type = 'post';
         setting.contentType = 'Application/json; charset=utf-8';
-        setting.data = JSON.stringify(area);
         setting.dataType = 'json';
         setting.url = 'ExportExcel.aspx/GetHoleData';
         setting.success = function (res) {
@@ -140,14 +130,14 @@ var getHoleNo = {
     }
 }
 
-var getLocationData = {
+var GetPointData = {
     load: function () {
         let setting = {};
         setting.type = 'post';
         setting.contentType = 'Application/json; charset=utf-8';
         setting.data = JSON.stringify(Type);
         setting.dataType = 'json';
-        setting.url = 'ExportExcel.aspx/GetLocationData';
+        setting.url = 'ExportExcel.aspx/GetPointData';
         setting.success = function (res) {
             let ans = res.hasOwnProperty('d') ? res.d : res;
             if (!ans.isOk) {
@@ -155,9 +145,7 @@ var getLocationData = {
                 window.location.href = "../Login.aspx";
             } else {
                 MainData = ans;
-                getLocationData.ShowOnThePage(ans);
-                if (Type.dataType == "Sid")
-                    getHoleNo.load();
+                GetPointData.ShowOnThePage(ans);
             }
         };
         setting.error = function (err) {
@@ -166,7 +154,6 @@ var getLocationData = {
         setting.done = function (res) {
 
         }
-
         $.ajax(setting);
     },
     ShowOnThePage: function (element) {
@@ -195,16 +182,14 @@ var getLocationData = {
         var htmlContent = "";
         var counter = 0;
         Instruments.forEach(function (element) {
-            if (counter == 0)
-                area.area = element;
             htmlContent += "<option value='" + element + "'>" + element + "</option>";
             counter++;
         })
-        $("#location").html(htmlContent);
+        $("#holeNo").html(htmlContent);
 
     }
 }
 
 $(document).ready(function () {
-    getLocationData.load();
+    GetPointData.load();
 });

@@ -297,13 +297,8 @@
                                     <option value="ELP">Piezometer (ELP)</option>
                                 </select>
                             </div>
-                            <div class="col-md-3">
-                                <label for="sel1">Location:</label>
-                                <select class="form-control" id="location">
-                                </select>
-                            </div>
-                            <div class="col-md-3" id="holeContainer" style="display:none;">
-                                <label for="sel1">Hole Number:</label>
+                            <div class="col-md-3" id="holeContainer">
+                                <label for="sel1"><p id="pointorhole">Hole</p> Number:</label>
                                 <select class="form-control" id="holeNo">
                                 </select>
                             </div>

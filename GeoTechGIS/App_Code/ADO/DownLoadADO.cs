@@ -38,9 +38,7 @@ public class DownLoadADO
         List<string> PointNoList = new List<string>();
         List<string> MeaNoList = new List<string>();
         string FileNameTarget = DataType + "-" + HoleNo+"-"+ DateTime.Now.ToString("yyyyMMddHHmmss") + ".xlsx";
-        string FileName = DataType + ".xlsx";
         string ProjectName = HttpContext.Current.Session["showProjects"].ToString();
-        string makeFilePath = HttpContext.Current.Server.MapPath("../Projects/" + ProjectName + "/Data/").ToString() + FileName;
         string makeFilePathTarget = HttpContext.Current.Server.MapPath("../Projects/" + ProjectName + "/Data/").ToString() + FileNameTarget;
         string FrontPath = "../Projects/" + ProjectName + "/Data/" + FileNameTarget;
 
@@ -51,7 +49,7 @@ public class DownLoadADO
         DatePointNoList = this.GetDataPerHole(MeaDateList);
 
         if (DatePointNoList.Length == 0) return "non";
-        if (ExcelWritter.writeExcelSID(DatePointNoList, MeaDateList, makeFilePath, makeFilePathTarget))
+        if (ExcelWritter.writeExcelSID(DatePointNoList, MeaDateList, makeFilePathTarget))
         {
             return FrontPath;
         }
@@ -61,28 +59,25 @@ public class DownLoadADO
         }
     }
 
-    public string getExcelPathByTypeArea(string DataType, string Area, string StartDate, string EndDate)
+    public string getExcelPathByTypeArea(string DataType, string PointNo, string StartDate, string EndDate)
     {
-        string[][][] DatePointNoList;
+        string[][] DatePointNoList;
         List<string> AllDateList = new List<string>();
         List<string> PointNoList = new List<string>();
         string FileNameTarget = DataType + "-" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xlsx";
-        string FileName = DataType+ ".xlsx";
         string ProjectName = HttpContext.Current.Session["showProjects"].ToString();
-        string makeFilePath = HttpContext.Current.Server.MapPath("../Projects/" + ProjectName + "/Data/").ToString() + FileName;
         string makeFilePathTarget = HttpContext.Current.Server.MapPath("../Projects/" + ProjectName + "/Data/").ToString() + FileNameTarget;
         string FrontPath = "../Projects/" + ProjectName + "/Data/" + FileNameTarget;
 
         StartDate += " 00:00:00";
         EndDate += " 23:59:59";
-
-        PointNoList = this.GetMRTPointNoListByArea(Area, DataType);
+        
         AllDateList = this.GetDateList(DataType, StartDate, EndDate, PointNoList);
-        DatePointNoList = this.GetPointNoData(PointNoList, DataType, StartDate, EndDate);
+        DatePointNoList = this.GetPointNoData(PointNo, DataType, StartDate, EndDate);
 
         if (DatePointNoList.Length == 0) return "non";
 
-        if (ExcelWritter.writeExcel(DatePointNoList, AllDateList, PointNoList, makeFilePath,makeFilePathTarget,DataType))
+        if (ExcelWritter.writeExcel(DatePointNoList, PointNo, makeFilePathTarget,DataType))
         {
             return FrontPath;
         }
@@ -393,25 +388,20 @@ public class DownLoadADO
         return list;
     }
 
-    private string[][][] GetPointNoData(List<string> PointNo, string DataType, string StartDate, string EndDate)
+    private string[][] GetPointNoData(string PointNo, string DataType, string StartDate, string EndDate)
     {
-        string[][][] DatePointNoList;
-
-        DatePointNoList = new string[PointNo.Count][][];
-
-        for (int i = 0, len = PointNo.Count; i < len; i++)
-        {
+        string[][] DatePointNoList;
             DataTable table = new DataTable();
             // value:0 read:1
             if (DataType == "SP")
                 cmd.CommandText = "SELECT Date, Settle AS Value " +
-                            "FROM SP WHERE(PointNo = '" + PointNo[i] + "') " +
+                            "FROM SP WHERE(PointNo = '" + PointNo + "') " +
                             "AND (Date BETWEEN '" + StartDate + "' AND '" + EndDate + "') " +
                             "ORDER BY Date";
             else
                 cmd.CommandText = "SELECT Date, Value " +
                             "FROM " + DataType + "  " +
-                            "WHERE(PointNo = '" + PointNo[i] + "') " +
+                            "WHERE(PointNo = '" + PointNo + "') " +
                             "AND (Date BETWEEN '" + StartDate + "' AND '" + EndDate + "') " +
                             "ORDER BY Date";
 
@@ -419,18 +409,16 @@ public class DownLoadADO
             adapter = new SqlDataAdapter(cmd);
             adapter.Fill(table);
 
-            DatePointNoList[i] = new string[table.Rows.Count][];
+            DatePointNoList = new string[table.Rows.Count][];
             int index = 0;
             foreach (DataRow item in table.Rows)
             {
-                DatePointNoList[i][index] = new string[2];
-                DatePointNoList[i][index][0] = Convert.ToDateTime(item["Date"]).ToString("yyyy/MM/dd HH:mm:ss");
-                DatePointNoList[i][index][1] = item["Value"].ToString();
+                DatePointNoList[index] = new string[2];
+                DatePointNoList[index][0] = Convert.ToDateTime(item["Date"]).ToString("yyyy/MM/dd HH:mm:ss");
+                DatePointNoList[index][1] = item["Value"].ToString();
 
                 index++;
             }
-        }
-
 
         return DatePointNoList;
     }

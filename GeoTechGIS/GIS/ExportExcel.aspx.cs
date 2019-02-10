@@ -49,7 +49,7 @@ public partial class GIS_Default : System.Web.UI.Page
     }
 
     [WebMethod(EnableSession = true)]
-    public static returnFilePath GetExcelPath(string from = "", string to = "", string area = "", string type = "")
+    public static returnFilePath GetExcelPath(string from = "", string to = "", string pointno = "", string type = "")
     {
         returnFilePath package = new returnFilePath();
         if (HttpContext.Current.Session["user"] == null)
@@ -69,7 +69,7 @@ public partial class GIS_Default : System.Web.UI.Page
                 if (item.ProjectName.Equals(projectName))
                 {
                     DownFile = new DownLoadADO(item.GetPorjectDB());
-                    package.Path = DownFile.getExcelPathByTypeArea(type, area, from, to);
+                    package.Path = DownFile.getExcelPathByTypeArea(type, pointno, from, to);
                     package.isOk = true;
                 }
             }
@@ -128,7 +128,7 @@ public partial class GIS_Default : System.Web.UI.Page
     }
 
     [WebMethod(EnableSession = true)]
-    public static returnStringData GetLocationData(string dataType = "")
+    public static returnStringData GetPointData(string dataType = "")
     {
         returnStringData package = new returnStringData();
 
@@ -152,7 +152,7 @@ public partial class GIS_Default : System.Web.UI.Page
                 {
                     dao = new ProjectDataADO(item.GetPorjectDB());
                     package.ProjectInfo = item;
-                    package.DataPackage = dao.GetLocationData(dataType);
+                    package.DataPackage = dao.GetPointData(dataType);
                     package.isOk = true;
                 }
             }
@@ -170,7 +170,7 @@ public partial class GIS_Default : System.Web.UI.Page
     }
 
     [WebMethod(EnableSession = true)]
-    public static returnStringData GetHoleData(string area = "")
+    public static returnStringData GetHoleData()
     {
         returnStringData package = new returnStringData();
 
@@ -194,7 +194,7 @@ public partial class GIS_Default : System.Web.UI.Page
                 {
                     dao = new ProjectDataADO(item.GetPorjectDB());
                     package.ProjectInfo = item;
-                    package.DataPackage = dao.GetHoleData(area);
+                    package.DataPackage = dao.GetHoleData();
                     package.isOk = true;
                 }
             }

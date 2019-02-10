@@ -28,14 +28,11 @@ public class ProjectDataADO
     }
 
     //hole data
-    public List<string> GetHoleData(string area = "")
+    public List<string> GetHoleData()
     {
         List<string> list = new List<string>();
         DataTable DataList = new DataTable();
-        if (area != "")
-        {
-            cmd.CommandText = "SELECT DISTINCT(HoleNo) FROM PosSid WHERE Area LIKE '%"+ area + "%'";
-        }
+        cmd.CommandText = "SELECT DISTINCT(HoleNo) FROM PosSid";
 
         adapter = new SqlDataAdapter(cmd);
         adapter.Fill(DataList);
@@ -48,13 +45,13 @@ public class ProjectDataADO
     }
 
     //location data
-    public List<string> GetLocationData(string dataType = "")
+    public List<string> GetPointData(string dataType = "")
     {
         List<string> list = new List<string>();
         DataTable DataList = new DataTable();
         if (dataType != "")
         {
-                cmd.CommandText = "SELECT DISTINCT(Area) FROM Pos" + dataType; ;
+                cmd.CommandText = "SELECT DISTINCT(PointNo) FROM Pos" + dataType + " ORDER BY PointNo";
         }
 
         adapter = new SqlDataAdapter(cmd);
@@ -62,7 +59,7 @@ public class ProjectDataADO
 
         foreach (DataRow item in DataList.Rows)
         {
-            list.Add(item["Area"].ToString());
+            list.Add(item["PointNo"].ToString());
         }
         return list;
     }
