@@ -23,7 +23,9 @@ public class ExcelWritter
         ExcelPackage pck = new ExcelPackage();
         var ws = pck.Workbook.Worksheets.Add(datatype);
         ws.Cells[1, 1].Value = "Point No : "+ PointNo;
-        for (int row = 2;  row < DataPackage.Length; row++)
+        ws.Cells[3, 1].Value = "Date";
+        ws.Cells[3, 2].Value = "Value";
+        for (int row = 4;  row < DataPackage.Length; row++)
         {
             ws.Cells[row, 1].Value = DataPackage[row][0];
             ws.Cells[row, 2].Value = DataPackage[row][1];

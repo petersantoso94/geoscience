@@ -18,49 +18,59 @@ var submit_filter = function (element) {
     let from_ = $("#filterFromDate").val();
     let to_ = $("#filterToDate").val();
     let DataFormat = {};
-    DataFormat = {
-        from: from_,
-        to: to_,
-        pointno: $("#holeNo").val(),
-        type: Type.dataType
-    };
-    if (Type.dataType == "Sid") {
+    if (!from_ || !to_) {
+        if (!from_ && !to_)
+            alert("Date is Empty!");
+        else if (!from_)
+            alert("From date is Empty!");
+        else if (!to_)
+            alert("To date is Empty!");
+        $('.loading').hide();
+    } else {
         DataFormat = {
             from: from_,
             to: to_,
-            holeno: $("#holeNo").val()
+            pointno: $("#holeNo").val(),
+            type: Type.dataType
         };
-    }
-    let setting = {};
-    setting.type = 'post';
-    setting.contentType = 'Application/json; charset=utf-8';
-    setting.data = JSON.stringify(DataFormat);
-    setting.dataType = 'json';
-    setting.url = 'ExportExcel.aspx/' + url;
-    setting.success = function (res) {
-        let ans;
-        if (res.hasOwnProperty('d')) {
-            ans = res.d;
-        } else {
-            ans = res;
+        if (Type.dataType == "Sid") {
+            DataFormat = {
+                from: from_,
+                to: to_,
+                holeno: $("#holeNo").val()
+            };
         }
-        if (ans.isOk) {
-            $('.loading').hide();
-            if (ans.Path == "non") {
+        let setting = {};
+        setting.type = 'post';
+        setting.contentType = 'Application/json; charset=utf-8';
+        setting.data = JSON.stringify(DataFormat);
+        setting.dataType = 'json';
+        setting.url = 'ExportExcel.aspx/' + url;
+        setting.success = function (res) {
+            let ans;
+            if (res.hasOwnProperty('d')) {
+                ans = res.d;
+            } else {
+                ans = res;
+            }
+            if (ans.isOk) {
+                $('.loading').hide();
+                if (ans.Path == "non") {
+                    $('.loading').hide();
+                    alert('Data is empty for ' + $("#holeNo").val());
+                } else {
+                    window.location.href = ans.Path;
+                }
+            } else {
                 $('.loading').hide();
                 alert('Data is empty for ' + $("#holeNo").val());
-            } else {
-                window.location.href = ans.Path;
             }
-        } else {
-            $('.loading').hide();
-            alert('Data is empty for ' + $("#holeNo").val());
-        }
-    };
-    setting.error = function (err) {
-        console.error(err);
-    };
-    $.ajax(setting);
+        };
+        setting.error = function (err) {
+            console.error(err);
+        };
+        $.ajax(setting);
+    }
 }
 
 $("#dataType").on("change", function () {
