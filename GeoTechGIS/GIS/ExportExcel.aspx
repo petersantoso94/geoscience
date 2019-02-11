@@ -298,7 +298,7 @@
                                 </select>
                             </div>
                             <div class="col-md-3" id="holeContainer">
-                                <label for="sel1"><p id="pointorhole">Hole</p> Number:</label>
+                                <label for="sel1"><span id="pointorhole">Point</span> Number:</label>
                                 <select class="form-control" id="holeNo">
                                 </select>
                             </div>

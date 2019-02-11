@@ -68,9 +68,11 @@ $("#dataType").on("change", function () {
     Type.dataType = $(this).val();
     $("#holeNo").html("");
     if ($(this).val() == "Sid") {
+        $('#pointorhole').html("Hole");
         url = "GetExcelPathSid";
         getHoleNo.load();
     } else {
+        $('#pointorhole').html("Point");
         url = "GetExcelPath";
         GetPointData.load();
     }
