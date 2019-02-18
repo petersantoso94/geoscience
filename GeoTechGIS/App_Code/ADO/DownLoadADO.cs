@@ -330,7 +330,7 @@ public class DownLoadADO
                           "FROM HoleDesc " +
                           "WHERE HoleNo LIKE '%" + holeno + "%' " +
                           "AND (Date BETWEEN '" + from + "' AND '" + to + "') " +
-                          "ORDER BY MeaNo";
+                          "ORDER BY Date DESC";
         adapter = new SqlDataAdapter(cmd);
         adapter.Fill(table);
 

@@ -41,6 +41,7 @@ public class ExcelWritter
         int dateCol = 2;
         ExcelPackage pck = new ExcelPackage();
         var ws = pck.Workbook.Worksheets.Add("SID");
+        ws.Cells[1, 1].Value = "Elevation (m)";
         for (int i = 0, length = MeaDate.Length; i < length; i++)
         {
             ws.Cells[startRow, dateCol].Value = MeaDate[i][1];
