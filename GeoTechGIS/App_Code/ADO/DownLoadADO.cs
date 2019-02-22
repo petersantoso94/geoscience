@@ -38,7 +38,9 @@ public class DownLoadADO
         List<string> PointNoList = new List<string>();
         List<string> MeaNoList = new List<string>();
         string FileNameTarget = DataType + "-" + HoleNo+"-"+ DateTime.Now.ToString("yyyyMMddHHmmss") + ".xlsx";
+        string FileNameTemplate = DataType + ".xlsx";
         string ProjectName = HttpContext.Current.Session["showProjects"].ToString();
+        string makeFilePathTemplate = HttpContext.Current.Server.MapPath("../Projects/" + ProjectName + "/Data/").ToString() + FileNameTemplate;
         string makeFilePathTarget = HttpContext.Current.Server.MapPath("../Projects/" + ProjectName + "/Data/").ToString() + FileNameTarget;
         string FrontPath = "../Projects/" + ProjectName + "/Data/" + FileNameTarget;
 
@@ -49,7 +51,7 @@ public class DownLoadADO
         DatePointNoList = this.GetDataPerHole(MeaDateList);
 
         if (DatePointNoList.Length == 0) return "non";
-        if (ExcelWritter.writeExcelSID(DatePointNoList, MeaDateList, makeFilePathTarget))
+        if (ExcelWritter.writeExcelSID(DatePointNoList, MeaDateList, makeFilePathTarget, makeFilePathTemplate))
         {
             return FrontPath;
         }
@@ -65,7 +67,9 @@ public class DownLoadADO
         List<string> AllDateList = new List<string>();
         List<string> PointNoList = new List<string>();
         string FileNameTarget = DataType + "-" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xlsx";
+        string FileNameTemplate = DataType+ ".xlsx";
         string ProjectName = HttpContext.Current.Session["showProjects"].ToString();
+        string makeFilePathTemplate = HttpContext.Current.Server.MapPath("../Projects/" + ProjectName + "/Data/").ToString() + FileNameTemplate;
         string makeFilePathTarget = HttpContext.Current.Server.MapPath("../Projects/" + ProjectName + "/Data/").ToString() + FileNameTarget;
         string FrontPath = "../Projects/" + ProjectName + "/Data/" + FileNameTarget;
 
@@ -77,7 +81,7 @@ public class DownLoadADO
 
         if (DatePointNoList.Length == 0) return "non";
 
-        if (ExcelWritter.writeExcel(DatePointNoList, PointNo, makeFilePathTarget,DataType))
+        if (ExcelWritter.writeExcel(DatePointNoList, PointNo, makeFilePathTarget,DataType, makeFilePathTemplate))
         {
             return FrontPath;
         }
