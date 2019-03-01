@@ -46,13 +46,12 @@ public class ExcelWritter
             dataCol = 14;
 
         }
-        ws.Cells[1, dateCol].Value = "Point No : "+ PointNo;
-        ws.Cells[3, dateCol].Value = "Date";
-        ws.Cells[3, dateCol+1].Value = "Value";
-        for (int row = 4;  row < DataPackage.Length; row++)
+        dateCol++;
+        ws.Cells[2, dateCol-1].Value = PointNo;
+        for (int col = 0;  col < DataPackage.Length; col++)
         {
-            ws.Cells[row, dateCol].Value = DataPackage[row][0];
-            ws.Cells[row, dateCol+1].Value = DataPackage[row][1];
+            ws.Cells[1, dateCol+col+1].Value = DataPackage[col][0];
+            ws.Cells[2, dateCol+col+1].Value = DataPackage[col][1];
         }
 
         pck.SaveAs(new FileInfo(target));
